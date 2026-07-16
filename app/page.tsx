@@ -41,8 +41,8 @@ function HeroSculpture() {
     if (!mount) return;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
-    camera.position.set(0, 0, 7.5);
+    const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+    camera.position.set(0, 0, 7.8);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -51,51 +51,103 @@ function HeroSculpture() {
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
     mount.appendChild(renderer.domElement);
 
     const group = new THREE.Group();
-    group.rotation.set(-0.22, 0.45, 0.08);
+    group.rotation.set(-0.1, -0.18, -0.08);
     scene.add(group);
 
-    const solid = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(1.72, 2),
-      new THREE.MeshPhysicalMaterial({
-        color: 0xd7ef3b,
-        roughness: 0.28,
-        metalness: 0.12,
-        clearcoat: 0.8,
-        clearcoatRoughness: 0.18,
-      }),
-    );
-    solid.scale.set(1, 1.22, 0.82);
-    group.add(solid);
+    const deformPoint = (x: number, y: number) => {
+      const twist = x * 0.92 + Math.sin(x * 0.7) * 0.3;
+      const centerY = Math.sin(x * 1.08) * 0.58 + Math.sin(x * 2.15) * 0.08;
+      const centerZ = Math.cos(x * 0.82) * 0.74;
+      return new THREE.Vector3(
+        x * 0.93,
+        centerY + y * Math.cos(twist) * 0.92,
+        centerZ + y * Math.sin(twist),
+      );
+    };
 
-    const wire = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(2.08, 1),
-      new THREE.MeshBasicMaterial({
-        color: 0x11110f,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.48,
-      }),
-    );
-    wire.rotation.set(0.5, -0.35, 0.2);
-    group.add(wire);
+    const ribbonGeometry = new THREE.PlaneGeometry(5.3, 1.5, 120, 6);
+    const position = ribbonGeometry.getAttribute("position") as THREE.BufferAttribute;
+    for (let index = 0; index < position.count; index += 1) {
+      const point = deformPoint(position.getX(index), position.getY(index));
+      position.setXYZ(index, point.x, point.y, point.z);
+    }
+    position.needsUpdate = true;
+    ribbonGeometry.computeVertexNormals();
 
-    const orbit = new THREE.Mesh(
-      new THREE.TorusGeometry(2.42, 0.055, 12, 180),
-      new THREE.MeshBasicMaterial({ color: 0xff4c1f }),
-    );
-    orbit.rotation.set(1.12, 0.25, -0.12);
-    group.add(orbit);
+    const outerMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x141412,
+      side: THREE.FrontSide,
+      roughness: 0.24,
+      metalness: 0.82,
+      clearcoat: 0.72,
+      clearcoatRoughness: 0.16,
+    });
+    const innerMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xd7ef3b,
+      side: THREE.BackSide,
+      roughness: 0.38,
+      metalness: 0.04,
+      clearcoat: 0.34,
+    });
+    const outerRibbon = new THREE.Mesh(ribbonGeometry, outerMaterial);
+    const innerRibbon = new THREE.Mesh(ribbonGeometry, innerMaterial);
+    group.add(outerRibbon, innerRibbon);
 
-    const key = new THREE.DirectionalLight(0xfff8e8, 5.5);
-    key.position.set(3, 4, 6);
+    const edgeMaterial = new THREE.LineBasicMaterial({
+      color: 0x11110f,
+      transparent: true,
+      opacity: 0.72,
+    });
+    const topEdgeGeometry = new THREE.BufferGeometry().setFromPoints(
+      Array.from({ length: 121 }, (_, index) => deformPoint(-2.65 + (5.3 * index) / 120, 0.75)),
+    );
+    const bottomEdgeGeometry = new THREE.BufferGeometry().setFromPoints(
+      Array.from({ length: 121 }, (_, index) => deformPoint(-2.65 + (5.3 * index) / 120, -0.75)),
+    );
+    group.add(
+      new THREE.Line(topEdgeGeometry, edgeMaterial),
+      new THREE.Line(bottomEdgeGeometry, edgeMaterial),
+    );
+
+    const threadCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-3.0, -0.95, 0.25),
+      new THREE.Vector3(-2.0, 0.48, 1.08),
+      new THREE.Vector3(-0.9, 1.2, -0.05),
+      new THREE.Vector3(0.05, -0.3, -1.05),
+      new THREE.Vector3(1.15, -1.08, 0.08),
+      new THREE.Vector3(2.18, 0.28, 1.0),
+      new THREE.Vector3(3.05, 0.88, 0.1),
+    ]);
+    const threadGeometry = new THREE.TubeGeometry(threadCurve, 140, 0.025, 8, false);
+    const threadMaterial = new THREE.MeshBasicMaterial({ color: 0xff4c1f });
+    const thread = new THREE.Mesh(threadGeometry, threadMaterial);
+    group.add(thread);
+
+    const nodeGeometry = new THREE.SphereGeometry(0.105, 24, 24);
+    const nodeMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xff4c1f,
+      roughness: 0.18,
+      metalness: 0.18,
+      clearcoat: 0.8,
+    });
+    const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
+    group.add(node);
+
+    const key = new THREE.DirectionalLight(0xfff8e8, 6.8);
+    key.position.set(2.5, 4.5, 6);
     scene.add(key);
-    const fill = new THREE.DirectionalLight(0xff4c1f, 2.1);
-    fill.position.set(-4, -2, 3);
+    const fill = new THREE.DirectionalLight(0xd7ef3b, 3.4);
+    fill.position.set(-4, -2.5, 4);
     scene.add(fill);
-    scene.add(new THREE.AmbientLight(0xffffff, 1.8));
+    const rim = new THREE.PointLight(0xff4c1f, 18, 11, 2);
+    rim.position.set(3.8, -2.3, 2.4);
+    scene.add(rim);
+    scene.add(new THREE.HemisphereLight(0xf2efe8, 0x35352f, 2.25));
 
     const pointer = new THREE.Vector2(0, 0);
     const target = new THREE.Vector2(0, 0);
@@ -112,8 +164,8 @@ function HeroSculpture() {
 
     const onPointerMove = (event: PointerEvent) => {
       const rect = mount.getBoundingClientRect();
-      target.x = ((event.clientX - rect.left) / rect.width - 0.5) * 0.8;
-      target.y = ((event.clientY - rect.top) / rect.height - 0.5) * 0.55;
+      target.x = ((event.clientX - rect.left) / rect.width - 0.5) * 0.48;
+      target.y = ((event.clientY - rect.top) / rect.height - 0.5) * 0.34;
     };
 
     const observer = new ResizeObserver(resize);
@@ -122,14 +174,15 @@ function HeroSculpture() {
     resize();
 
     let frame = 0;
-    const clock = new THREE.Clock();
+    const startedAt = performance.now();
     const render = () => {
-      const elapsed = clock.getElapsedTime();
-      pointer.lerp(target, 0.055);
-      group.rotation.y = 0.42 + pointer.x + elapsed * 0.09;
-      group.rotation.x = -0.2 + pointer.y + Math.sin(elapsed * 0.55) * 0.045;
-      wire.rotation.z = elapsed * -0.11;
-      orbit.rotation.z = elapsed * 0.07;
+      const elapsed = (performance.now() - startedAt) / 1000;
+      pointer.lerp(target, 0.024);
+      group.rotation.y = -0.18 + pointer.x;
+      group.rotation.x = -0.1 + pointer.y;
+      group.rotation.z = -0.08 + Math.sin(elapsed * 0.32) * 0.025;
+      group.scale.y = 1 + Math.sin(elapsed * 0.52) * 0.012;
+      node.position.copy(threadCurve.getPointAt((0.18 + elapsed * 0.032) % 1));
       renderer.render(scene, camera);
       frame = window.requestAnimationFrame(render);
     };
@@ -141,12 +194,16 @@ function HeroSculpture() {
       window.cancelAnimationFrame(frame);
       observer.disconnect();
       mount.removeEventListener("pointermove", onPointerMove);
-      solid.geometry.dispose();
-      wire.geometry.dispose();
-      orbit.geometry.dispose();
-      (solid.material as THREE.Material).dispose();
-      (wire.material as THREE.Material).dispose();
-      (orbit.material as THREE.Material).dispose();
+      ribbonGeometry.dispose();
+      topEdgeGeometry.dispose();
+      bottomEdgeGeometry.dispose();
+      threadGeometry.dispose();
+      nodeGeometry.dispose();
+      outerMaterial.dispose();
+      innerMaterial.dispose();
+      edgeMaterial.dispose();
+      threadMaterial.dispose();
+      nodeMaterial.dispose();
       renderer.dispose();
       renderer.domElement.remove();
     };
@@ -155,10 +212,10 @@ function HeroSculpture() {
   return (
     <div className="sculpture-wrap" aria-hidden="true">
       <div className="sculpture-grid" />
-      <div className="sculpture-beam" />
+      <div className="sculpture-halo" />
       <div className="sculpture-canvas" ref={mountRef} />
-      <div className="sculpture-index">FORM STUDY / 001</div>
-      <div className="sculpture-note">POINTER-REACTIVE OBJECT</div>
+      <div className="sculpture-index">FOLDED FORM / 002</div>
+      <div className="sculpture-note">CHROME / PAPER / LIGHT</div>
     </div>
   );
 }
