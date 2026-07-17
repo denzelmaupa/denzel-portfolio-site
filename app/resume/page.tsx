@@ -94,7 +94,7 @@ export default function ResumePage() {
             Zimbabwean graphic designer with agency experience across brand identity, advertising,
             campaigns and multi-format visual systems. I combine clear communication, considered
             craft and practical production thinking, with certified UI/UX training and a growing
-            digital-design practice.
+            digital-design practice spanning interface design and AI-assisted product prototyping.
           </p>
           <div className="resume-contact">
             <a href="mailto:denzelmaupa@gmail.com">denzelmaupa@gmail.com</a>
@@ -117,6 +117,7 @@ export default function ResumePage() {
                 <li>Social media design</li>
                 <li>Outdoor &amp; print</li>
                 <li>UI/UX design</li>
+                <li>AI-assisted prototyping</li>
                 <li>Photography</li>
               </ul>
             </section>
@@ -124,11 +125,12 @@ export default function ResumePage() {
             <section>
               <p className="resume-section-label">Tools</p>
               <p className="resume-rail-copy">
-                Adobe Photoshop<br />
-                Adobe Illustrator<br />
-                Adobe InDesign<br />
+                Affinity Designer / Photo / Publisher<br />
                 Figma<br />
-                HTML &amp; CSS
+                Adobe Photoshop / Illustrator / InDesign<br />
+                HTML &amp; CSS<br />
+                React / Next.js<br />
+                Supabase
               </p>
             </section>
 
