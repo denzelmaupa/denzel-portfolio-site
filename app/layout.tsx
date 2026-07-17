@@ -24,20 +24,18 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     metadataBase: base,
-    title: "Mara Okafor — Independent Graphic Designer",
+    title: "Denzel Maupa — Graphic Designer & Visual Communicator",
     description:
-      "Identity, art direction and editorial design for people making culture move forward.",
+      "Zimbabwean graphic designer and visual communicator working across branding, advertising and a growing UI/UX practice.",
     openGraph: {
-      title: "Mara Okafor — Independent Graphic Designer",
-      description: "Visual systems for culture, commerce and change.",
+      title: "Denzel Maupa — Graphic Designer & Visual Communicator",
+      description: "Maximised minimalism. Creative simplicity.",
       type: "website",
-      images: [{ url: new URL("/og.png", base).toString(), width: 1536, height: 909 }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Mara Okafor — Independent Graphic Designer",
-      description: "Visual systems for culture, commerce and change.",
-      images: [new URL("/og.png", base).toString()],
+      title: "Denzel Maupa — Graphic Designer & Visual Communicator",
+      description: "Maximised minimalism. Creative simplicity.",
     },
   };
 }

@@ -2,36 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-
-const projects = [
-  {
-    number: "01",
-    title: "Night / Shift",
-    category: "Festival identity",
-    year: "2026",
-    description:
-      "A shape-shifting identity for an after-dark music programme, built to move from street posters to live stages.",
-    className: "night-shift",
-  },
-  {
-    number: "02",
-    title: "Common Ground",
-    category: "Editorial campaign",
-    year: "2025",
-    description:
-      "A bold editorial system turning climate research into an optimistic, human-scale public conversation.",
-    className: "common-ground",
-  },
-  {
-    number: "03",
-    title: "Alto",
-    category: "Packaging system",
-    year: "2024",
-    description:
-      "A tactile packaging family for a small-batch aperitivo, balancing old-world ritual with modern hospitality.",
-    className: "alto",
-  },
-];
+import { ProjectArtwork } from "./components/ProjectArtwork";
+import { projects } from "./content/projects";
 
 function HeroSculpture() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -39,6 +11,7 @@ function HeroSculpture() {
   useEffect(() => {
     const mount = mountRef.current;
     if (!mount) return;
+    if (window.matchMedia("(max-width: 600px)").matches) return;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
@@ -52,102 +25,183 @@ function HeroSculpture() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 1.05;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     mount.appendChild(renderer.domElement);
 
     const group = new THREE.Group();
-    group.rotation.set(-0.1, -0.18, -0.08);
+    group.rotation.set(-0.04, 0, 0);
     scene.add(group);
 
-    const deformPoint = (x: number, y: number) => {
-      const twist = x * 0.92 + Math.sin(x * 0.7) * 0.3;
-      const centerY = Math.sin(x * 1.08) * 0.58 + Math.sin(x * 2.15) * 0.08;
-      const centerZ = Math.cos(x * 0.82) * 0.74;
-      return new THREE.Vector3(
-        x * 0.93,
-        centerY + y * Math.cos(twist) * 0.92,
-        centerZ + y * Math.sin(twist),
-      );
+    const createPosterTexture = (variant: number) => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 900;
+      canvas.height = 1200;
+      const context = canvas.getContext("2d");
+      if (!context) throw new Error("Canvas rendering is unavailable.");
+
+      const project = projects[variant];
+      const palette = [
+        { background: project.palette[0], foreground: project.palette[1], accent: project.palette[2] },
+        { background: project.palette[0], foreground: project.palette[1], accent: project.palette[2] },
+        { background: project.palette[0], foreground: project.palette[1], accent: project.palette[2] },
+      ][variant];
+
+      context.fillStyle = palette.background;
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.strokeStyle = variant === 1 ? "rgba(242,239,232,.13)" : "rgba(17,17,15,.16)";
+      context.lineWidth = 2;
+      for (let x = 75; x < 900; x += 150) {
+        context.beginPath();
+        context.moveTo(x, 0);
+        context.lineTo(x, 1200);
+        context.stroke();
+      }
+      for (let y = 75; y < 1200; y += 150) {
+        context.beginPath();
+        context.moveTo(0, y);
+        context.lineTo(900, y);
+        context.stroke();
+      }
+
+      context.fillStyle = palette.foreground;
+      context.font = "24px ui-monospace, SFMono-Regular, Menlo, monospace";
+      context.letterSpacing = "3px";
+      context.fillText(`${project.title.toUpperCase()} / ${project.category.toUpperCase()}`, 54, 66);
+      context.fillText(`0${variant + 1} / 03`, 720, 1144);
+
+      if (variant === 0) {
+        context.font = "italic 168px Georgia, serif";
+        context.letterSpacing = "-10px";
+        context.fillText("OPEN", 48, 382);
+        context.fillText("CRED", 48, 566);
+        context.fillStyle = palette.accent;
+        context.beginPath();
+        context.arc(690, 820, 122, 0, Math.PI * 2);
+        context.fill();
+        context.fillStyle = palette.foreground;
+        context.font = "26px ui-monospace, SFMono-Regular, Menlo, monospace";
+        context.letterSpacing = "2px";
+        context.fillText("LOGO / GUIDE / MOCKUPS", 48, 1024);
+        context.fillText("LEAD DESIGN / JERICHO", 48, 1064);
+      } else if (variant === 1) {
+        context.font = "italic 142px Georgia, serif";
+        context.letterSpacing = "-8px";
+        context.fillText("TM", 42, 318);
+        context.fillText("BILLBOARD", 42, 474);
+        context.strokeStyle = palette.foreground;
+        context.lineWidth = 3;
+        context.strokeRect(52, 632, 790, 310);
+        context.fillStyle = palette.accent;
+        context.fillRect(52, 632, 22, 310);
+        context.fillStyle = palette.foreground;
+        context.font = "25px ui-monospace, SFMono-Regular, Menlo, monospace";
+        context.letterSpacing = "2px";
+        context.fillText("OUTDOOR THAT READS", 120, 718);
+        context.fillText("AT REAL-WORLD SPEED.", 120, 770);
+        context.strokeRect(120, 824, 652, 62);
+        context.fillText("PHOTOS / VIDEO / MOCKUPS", 160, 864);
+      } else {
+        context.font = "162px Georgia, serif";
+        context.letterSpacing = "-12px";
+        context.fillText("SYMPHONY", 34, 410);
+        context.strokeStyle = palette.foreground;
+        context.lineWidth = 4;
+        context.strokeRect(54, 610, 792, 330);
+        context.fillStyle = palette.accent;
+        context.fillRect(54, 610, 244, 330);
+        context.fillStyle = palette.foreground;
+        context.beginPath();
+        context.arc(440, 760, 86, 0, Math.PI * 2);
+        context.fill();
+        context.beginPath();
+        context.arc(650, 760, 120, 0, Math.PI * 2);
+        context.stroke();
+        context.fillStyle = palette.foreground;
+        context.font = "26px ui-monospace, SFMono-Regular, Menlo, monospace";
+        context.letterSpacing = "2px";
+        context.fillText("FLAVOUR / RHYTHM / IDENTITY", 54, 1014);
+        context.fillText("INDEPENDENT PROJECT", 54, 1056);
+      }
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      return texture;
     };
 
-    const ribbonGeometry = new THREE.PlaneGeometry(5.3, 1.5, 120, 6);
-    const position = ribbonGeometry.getAttribute("position") as THREE.BufferAttribute;
-    for (let index = 0; index < position.count; index += 1) {
-      const point = deformPoint(position.getX(index), position.getY(index));
-      position.setXYZ(index, point.x, point.y, point.z);
-    }
-    position.needsUpdate = true;
-    ribbonGeometry.computeVertexNormals();
+    const createPosterGeometry = (curve: number) => {
+      const geometry = new THREE.PlaneGeometry(3.05, 4.06, 28, 36);
+      const posterPosition = geometry.getAttribute("position") as THREE.BufferAttribute;
+      for (let index = 0; index < posterPosition.count; index += 1) {
+        const x = posterPosition.getX(index);
+        const y = posterPosition.getY(index);
+        const z = curve * (x * x - 0.55) + Math.sin((y + 2.03) * 1.42) * 0.018;
+        posterPosition.setZ(index, z);
+      }
+      posterPosition.needsUpdate = true;
+      geometry.computeVertexNormals();
+      return geometry;
+    };
 
-    const outerMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x141412,
-      side: THREE.FrontSide,
-      roughness: 0.24,
-      metalness: 0.82,
-      clearcoat: 0.72,
-      clearcoatRoughness: 0.16,
-    });
-    const innerMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xd7ef3b,
-      side: THREE.BackSide,
-      roughness: 0.38,
-      metalness: 0.04,
-      clearcoat: 0.34,
-    });
-    const outerRibbon = new THREE.Mesh(ribbonGeometry, outerMaterial);
-    const innerRibbon = new THREE.Mesh(ribbonGeometry, innerMaterial);
-    group.add(outerRibbon, innerRibbon);
-
-    const edgeMaterial = new THREE.LineBasicMaterial({
-      color: 0x11110f,
-      transparent: true,
-      opacity: 0.72,
-    });
-    const topEdgeGeometry = new THREE.BufferGeometry().setFromPoints(
-      Array.from({ length: 121 }, (_, index) => deformPoint(-2.65 + (5.3 * index) / 120, 0.75)),
+    const posterSpecs = [
+      { x: -1.4, y: 0.16, z: -0.32, rz: -0.12, ry: 0.16, curve: 0.038 },
+      { x: 0, y: -0.06, z: 0.46, rz: 0.025, ry: -0.035, curve: -0.026 },
+      { x: 1.42, y: 0.05, z: -0.16, rz: 0.125, ry: -0.17, curve: 0.045 },
+    ];
+    const posterTextures = posterSpecs.map((_, index) => createPosterTexture(index));
+    const posterGeometries = posterSpecs.map((spec) => createPosterGeometry(spec.curve));
+    const posterMaterials = posterTextures.map(
+      (texture) =>
+        new THREE.MeshPhysicalMaterial({
+          map: texture,
+          side: THREE.DoubleSide,
+          roughness: 0.72,
+          metalness: 0,
+          clearcoat: 0.08,
+          clearcoatRoughness: 0.8,
+        }),
     );
-    const bottomEdgeGeometry = new THREE.BufferGeometry().setFromPoints(
-      Array.from({ length: 121 }, (_, index) => deformPoint(-2.65 + (5.3 * index) / 120, -0.75)),
-    );
-    group.add(
-      new THREE.Line(topEdgeGeometry, edgeMaterial),
-      new THREE.Line(bottomEdgeGeometry, edgeMaterial),
-    );
-
-    const threadCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-3.0, -0.95, 0.25),
-      new THREE.Vector3(-2.0, 0.48, 1.08),
-      new THREE.Vector3(-0.9, 1.2, -0.05),
-      new THREE.Vector3(0.05, -0.3, -1.05),
-      new THREE.Vector3(1.15, -1.08, 0.08),
-      new THREE.Vector3(2.18, 0.28, 1.0),
-      new THREE.Vector3(3.05, 0.88, 0.1),
-    ]);
-    const threadGeometry = new THREE.TubeGeometry(threadCurve, 140, 0.025, 8, false);
-    const threadMaterial = new THREE.MeshBasicMaterial({ color: 0xff4c1f });
-    const thread = new THREE.Mesh(threadGeometry, threadMaterial);
-    group.add(thread);
-
-    const nodeGeometry = new THREE.SphereGeometry(0.105, 24, 24);
-    const nodeMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xff4c1f,
-      roughness: 0.18,
-      metalness: 0.18,
-      clearcoat: 0.8,
+    const posters = posterSpecs.map((spec, index) => {
+      const poster = new THREE.Mesh(posterGeometries[index], posterMaterials[index]);
+      poster.position.set(0, spec.y, spec.z);
+      poster.rotation.set(-0.025, spec.ry, 0);
+      poster.castShadow = true;
+      poster.receiveShadow = true;
+      poster.userData = spec;
+      group.add(poster);
+      return poster;
     });
-    const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
-    group.add(node);
 
-    const key = new THREE.DirectionalLight(0xfff8e8, 6.8);
-    key.position.set(2.5, 4.5, 6);
+    const raycaster = new THREE.Raycaster();
+    const pointerNdc = new THREE.Vector2();
+    let hoveredPoster = -1;
+    let dragging = false;
+    let pointerStartX = 0;
+    let dragOffset = 0;
+    let maxDragDistance = 0;
+
+    const shadowGeometry = new THREE.PlaneGeometry(9, 8);
+    const shadowMaterial = new THREE.ShadowMaterial({ color: 0x11110f, opacity: 0.22 });
+    const shadowPlane = new THREE.Mesh(shadowGeometry, shadowMaterial);
+    shadowPlane.position.z = -1.15;
+    shadowPlane.receiveShadow = true;
+    scene.add(shadowPlane);
+
+    const key = new THREE.DirectionalLight(0xfffbf0, 6.2);
+    key.position.set(-2.5, 5.5, 7);
+    key.castShadow = true;
+    key.shadow.mapSize.set(2048, 2048);
+    key.shadow.camera.left = -6;
+    key.shadow.camera.right = 6;
+    key.shadow.camera.top = 6;
+    key.shadow.camera.bottom = -6;
     scene.add(key);
-    const fill = new THREE.DirectionalLight(0xd7ef3b, 3.4);
-    fill.position.set(-4, -2.5, 4);
+    const fill = new THREE.DirectionalLight(0xd7ef3b, 1.7);
+    fill.position.set(4, -2.5, 4.5);
     scene.add(fill);
-    const rim = new THREE.PointLight(0xff4c1f, 18, 11, 2);
-    rim.position.set(3.8, -2.3, 2.4);
-    scene.add(rim);
-    scene.add(new THREE.HemisphereLight(0xf2efe8, 0x35352f, 2.25));
+    scene.add(new THREE.HemisphereLight(0xf2efe8, 0x77746c, 2));
 
     const pointer = new THREE.Vector2(0, 0);
     const target = new THREE.Vector2(0, 0);
@@ -162,27 +216,85 @@ function HeroSculpture() {
       camera.updateProjectionMatrix();
     };
 
+    const updateHitTarget = (event: PointerEvent) => {
+      const rect = mount.getBoundingClientRect();
+      pointerNdc.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      pointerNdc.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(pointerNdc, camera);
+      const hit = raycaster.intersectObjects(posters, false)[0];
+      hoveredPoster = hit ? posters.indexOf(hit.object as (typeof posters)[number]) : -1;
+      mount.style.cursor = dragging ? "grabbing" : hoveredPoster >= 0 ? "pointer" : "grab";
+    };
+
     const onPointerMove = (event: PointerEvent) => {
       const rect = mount.getBoundingClientRect();
-      target.x = ((event.clientX - rect.left) / rect.width - 0.5) * 0.48;
+      target.x = ((event.clientX - rect.left) / rect.width - 0.5) * 0.62;
       target.y = ((event.clientY - rect.top) / rect.height - 0.5) * 0.34;
+      if (dragging) {
+        const distance = event.clientX - pointerStartX;
+        dragOffset = (distance / Math.max(rect.width, 1)) * 1.8;
+        maxDragDistance = Math.max(maxDragDistance, Math.abs(distance));
+      }
+      updateHitTarget(event);
+    };
+
+    const onPointerDown = (event: PointerEvent) => {
+      dragging = true;
+      pointerStartX = event.clientX;
+      maxDragDistance = 0;
+      mount.setPointerCapture(event.pointerId);
+      updateHitTarget(event);
+    };
+
+    const onPointerUp = (event: PointerEvent) => {
+      updateHitTarget(event);
+      const destination = hoveredPoster >= 0 ? `/work/${projects[hoveredPoster].slug}` : null;
+      dragging = false;
+      dragOffset = 0;
+      if (mount.hasPointerCapture(event.pointerId)) mount.releasePointerCapture(event.pointerId);
+      mount.style.cursor = hoveredPoster >= 0 ? "pointer" : "grab";
+      if (maxDragDistance < 8 && destination) window.location.assign(destination);
+    };
+
+    const onPointerLeave = () => {
+      if (dragging) return;
+      hoveredPoster = -1;
+      target.set(0, 0);
+      mount.style.cursor = "grab";
     };
 
     const observer = new ResizeObserver(resize);
     observer.observe(mount);
-    if (!prefersReducedMotion) mount.addEventListener("pointermove", onPointerMove);
+    mount.addEventListener("pointermove", onPointerMove);
+    mount.addEventListener("pointerdown", onPointerDown);
+    mount.addEventListener("pointerup", onPointerUp);
+    mount.addEventListener("pointercancel", onPointerUp);
+    mount.addEventListener("pointerleave", onPointerLeave);
     resize();
 
     let frame = 0;
     const startedAt = performance.now();
     const render = () => {
       const elapsed = (performance.now() - startedAt) / 1000;
-      pointer.lerp(target, 0.024);
-      group.rotation.y = -0.18 + pointer.x;
-      group.rotation.x = -0.1 + pointer.y;
-      group.rotation.z = -0.08 + Math.sin(elapsed * 0.32) * 0.025;
-      group.scale.y = 1 + Math.sin(elapsed * 0.52) * 0.012;
-      node.position.copy(threadCurve.getPointAt((0.18 + elapsed * 0.032) % 1));
+      pointer.lerp(target, 0.028);
+      const intro = prefersReducedMotion ? 1 : 1 - Math.pow(1 - Math.min(elapsed / 1.7, 1), 4);
+      group.rotation.y = pointer.x * 0.12;
+      group.rotation.x = -0.04 + pointer.y * 0.1;
+      posters.forEach((poster, index) => {
+        const spec = poster.userData as (typeof posterSpecs)[number];
+        const depth = index - 1;
+        const hoverSpread = hoveredPoster >= 0 ? (index - hoveredPoster) * 0.09 : 0;
+        const targetX = spec.x * intro + pointer.x * depth * 0.32 + dragOffset * depth + hoverSpread;
+        const targetZ = spec.z + (hoveredPoster === index ? 0.52 : 0);
+        poster.position.x += (targetX - poster.position.x) * 0.07;
+        poster.position.y = spec.y + Math.sin(elapsed * 0.45 + index * 1.7) * 0.035;
+        poster.position.z += (targetZ - poster.position.z) * 0.09;
+        poster.rotation.y = spec.ry + pointer.x * depth * 0.08;
+        poster.rotation.x = -0.025 - pointer.y * 0.07;
+        poster.rotation.z = spec.rz * intro + pointer.x * depth * 0.035;
+        const targetScale = hoveredPoster === index ? 1.055 : 1;
+        poster.scale.setScalar(THREE.MathUtils.lerp(poster.scale.x, targetScale, 0.1));
+      });
       renderer.render(scene, camera);
       frame = window.requestAnimationFrame(render);
     };
@@ -194,28 +306,39 @@ function HeroSculpture() {
       window.cancelAnimationFrame(frame);
       observer.disconnect();
       mount.removeEventListener("pointermove", onPointerMove);
-      ribbonGeometry.dispose();
-      topEdgeGeometry.dispose();
-      bottomEdgeGeometry.dispose();
-      threadGeometry.dispose();
-      nodeGeometry.dispose();
-      outerMaterial.dispose();
-      innerMaterial.dispose();
-      edgeMaterial.dispose();
-      threadMaterial.dispose();
-      nodeMaterial.dispose();
+      mount.removeEventListener("pointerdown", onPointerDown);
+      mount.removeEventListener("pointerup", onPointerUp);
+      mount.removeEventListener("pointercancel", onPointerUp);
+      mount.removeEventListener("pointerleave", onPointerLeave);
+      posterGeometries.forEach((geometry) => geometry.dispose());
+      posterTextures.forEach((texture) => texture.dispose());
+      posterMaterials.forEach((material) => material.dispose());
+      shadowGeometry.dispose();
+      shadowMaterial.dispose();
       renderer.dispose();
       renderer.domElement.remove();
     };
   }, []);
 
   return (
-    <div className="sculpture-wrap" aria-hidden="true">
-      <div className="sculpture-grid" />
-      <div className="sculpture-halo" />
-      <div className="sculpture-canvas" ref={mountRef} />
-      <div className="sculpture-index">FOLDED FORM / 002</div>
-      <div className="sculpture-note">CHROME / PAPER / LIGHT</div>
+    <div className="sculpture-wrap" role="group" aria-label="Interactive project previews">
+      <div className="sculpture-grid" aria-hidden="true" />
+      <div className="sculpture-halo" aria-hidden="true" />
+      <div className="sculpture-canvas" ref={mountRef} aria-hidden="true" />
+      <div className="sculpture-index" aria-hidden="true">PROJECT SHEETS / 003</div>
+      <div className="sculpture-note" aria-hidden="true">DRAG / TAP / EXPLORE</div>
+      <div className="mobile-project-intro">
+        <p>Selected project sheets / 001—003</p>
+        <h2>Real work.<br /><i>Clear stories.</i></h2>
+        <span>Choose a project to explore the case-study structure.</span>
+      </div>
+      <div className="poster-links" aria-label="Open a project">
+        {projects.slice(0, 3).map((project) => (
+          <a href={`/work/${project.slug}`} key={project.slug}>
+            <span>{project.number}</span>{project.title}
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
@@ -247,23 +370,24 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Mara Okafor, home">
-          MO<span>®</span>
+        <a className="wordmark" href="/" aria-label="Denzel Maupa, home">
+          DM<span>®</span>
         </a>
-        <p className="header-role">Independent graphic designer<br />London / Accra</p>
+        <p className="header-role">Graphic designer &amp; visual communicator<br />Harare / Global</p>
         <nav aria-label="Primary navigation">
           <a href="#work">Work</a>
-          <a href="#studio">Studio</a>
-          <a href="#contact">Contact</a>
+          <a href="/about">About</a>
+          <a href="/resume">Résumé</a>
+          <a href="/contact">Contact</a>
         </nav>
       </header>
 
       <section className="hero" id="top">
         <div className="hero-copy" data-reveal>
-          <p className="eyebrow"><span>Available for select projects</span> / 2026</p>
-          <h1>Visual systems for culture, commerce <i>&amp;</i> change.</h1>
+          <p className="eyebrow"><span>Open to thoughtful opportunities</span> / 2026</p>
+          <h1>Maximised minimalism. <i>Creative simplicity.</i></h1>
           <div className="hero-foot">
-            <p>Identity, art direction and editorial design for people making culture move forward.</p>
+            <p>Graphic design and visual communication shaped by advertising, systems thinking and a growing UI/UX practice.</p>
             <a href="#work" className="text-link">View selected work <span>↘</span></a>
           </div>
         </div>
@@ -280,86 +404,93 @@ export default function Home() {
       <section className="work-section" id="work">
         <div className="section-heading" data-reveal>
           <p><span>01</span> Selected work</p>
-          <p>2024—2026</p>
+          <p>Graphic / Product / Hybrid</p>
         </div>
         <div className="projects">
           {projects.map((project) => (
             <article className="project" key={project.title} data-reveal>
-              <div className={`project-art ${project.className}`}>
-                {project.className === "night-shift" && (
-                  <>
-                    <div className="ns-title">NIGHT<br />SHIFT</div>
-                    <div className="ns-orbit" />
-                    <div className="ns-date">21—24 / AUG</div>
-                  </>
-                )}
-                {project.className === "common-ground" && (
-                  <>
-                    <div className="cg-word cg-one">COMMON</div>
-                    <div className="cg-word cg-two">GROUND</div>
-                    <div className="cg-disc" />
-                    <div className="cg-caption">A FIELD GUIDE TO A SHARED FUTURE</div>
-                  </>
-                )}
-                {project.className === "alto" && (
-                  <>
-                    <div className="alto-bottle bottle-one"><span>ALTO</span></div>
-                    <div className="alto-bottle bottle-two"><span>ALTO</span></div>
-                    <div className="alto-sun" />
-                    <div className="alto-type">APERITIVO<br />A MODERN RITUAL</div>
-                  </>
-                )}
-              </div>
-              <div className="project-meta">
-                <p className="project-number">{project.number}</p>
-                <div>
-                  <h2>{project.title}</h2>
-                  <p className="project-description">{project.description}</p>
+              <a className="project-link" href={`/work/${project.slug}`} aria-label={`View ${project.title} case study`}>
+                <div className={`project-art ${project.className}`}>
+                  <ProjectArtwork project={project} />
                 </div>
-                <p>{project.category}</p>
-                <p className="project-year">{project.year}</p>
-              </div>
+                <div className="project-meta">
+                  <p className="project-number">{project.number}</p>
+                  <div>
+                    <h2>{project.title}</h2>
+                    <p className="project-description">{project.description}</p>
+                  </div>
+                  <p>{project.discipline}<br />{project.category}</p>
+                  <p className="project-year">{project.year}</p>
+                </div>
+              </a>
             </article>
           ))}
         </div>
       </section>
 
+      <section className="practice-section" id="practice">
+        <div className="section-heading" data-reveal>
+          <p><span>02</span> Practice</p>
+          <p>One approach / multiple surfaces</p>
+        </div>
+        <p className="practice-lead" data-reveal>
+          I use systems thinking to connect how something <i>looks</i>, how it <i>works</i>, and how it <i>feels to use.</i>
+        </p>
+        <div className="practice-grid">
+          <article data-reveal>
+            <p>01 / Graphic design</p>
+            <h2>Make the idea visible.</h2>
+            <span>Identity systems, campaigns, editorial, packaging and art direction.</span>
+          </article>
+          <article data-reveal>
+            <p>02 / UI/UX design</p>
+            <h2>Grow the digital practice.</h2>
+            <span>Certified in UI/UX and actively developing research, interaction design, prototyping and product thinking.</span>
+          </article>
+          <article data-reveal>
+            <p>03 / Shared systems</p>
+            <h2>Make every touchpoint belong.</h2>
+            <span>Design systems, motion principles, accessible components and digital art direction.</span>
+          </article>
+        </div>
+      </section>
+
       <section className="studio-section" id="studio">
         <div className="section-heading light" data-reveal>
-          <p><span>02</span> Studio</p>
-          <p>Independent practice</p>
+          <p><span>03</span> Studio</p>
+          <p>Harare / Zimbabwe</p>
         </div>
         <div className="studio-grid">
           <p className="studio-lead" data-reveal>
-            I build <i>expressive identities</i> with enough structure to stay coherent—and enough friction to stay remembered.
+            I make <i>clear visual ideas</i> with enough detail to feel considered—and enough restraint to stay memorable.
           </p>
           <div className="studio-detail" data-reveal>
-            <p>Working between London and Accra, I collaborate with founders, cultural institutions and creative teams from first idea to final expression.</p>
+            <p>I’m Denzel Maupa, a Zimbabwean graphic designer and visual communicator working at Jericho Advertising. Advertising sharpened how I think about attention, hierarchy and what a message needs to do—not only how it looks.</p>
             <div className="services">
-              <p><span>01</span> Strategy &amp; positioning</p>
-              <p><span>02</span> Visual identity</p>
-              <p><span>03</span> Art direction</p>
-              <p><span>04</span> Editorial &amp; digital</p>
+              <p><span>01</span> Branding &amp; identity</p>
+              <p><span>02</span> Advertising &amp; campaigns</p>
+              <p><span>03</span> Editorial &amp; social</p>
+              <p><span>04</span> UI/UX &amp; digital</p>
             </div>
           </div>
         </div>
-        <div className="studio-mark" aria-hidden="true">M/O</div>
+        <div className="studio-mark" aria-hidden="true">D/M</div>
       </section>
 
       <footer id="contact">
         <div className="section-heading" data-reveal>
-          <p><span>03</span> Contact</p>
-          <p>New business / collaborations</p>
+          <p><span>04</span> Contact</p>
+          <p>Roles / projects / collaborations</p>
         </div>
         <div className="contact-main" data-reveal>
-          <p>Have a project in mind?</p>
-          <a href="mailto:hello@maraokafor.design">Let’s make it<br /><i>impossible to ignore.</i><span>↗</span></a>
+          <p>Let’s make something clear, useful and memorable.</p>
+          <a href="/contact">Start a<br /><i>conversation.</i><span>↗</span></a>
         </div>
         <div className="footer-base">
-          <p>© Mara Okafor 2026</p>
+          <p>© Denzel Maupa 2026</p>
           <div>
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer">Instagram</a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://www.instagram.com/designed_by_denzel/" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://www.linkedin.com/in/denzel-maupa/" target="_blank" rel="noreferrer">LinkedIn</a>
           </div>
           <a href="#top">Back to top ↑</a>
         </div>
