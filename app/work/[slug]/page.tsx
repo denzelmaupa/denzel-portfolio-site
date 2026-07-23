@@ -25,6 +25,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) notFound();
   const index = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(index + 1) % projects.length];
+  const isOpenCred = project.slug === "opencred-finance";
 
   return (
     <main className="interior-page" id="top">
@@ -71,10 +72,118 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
       </section>
 
+      {isOpenCred && (
+        <>
+          <section className="opencred-section opencred-identity" aria-labelledby="opencred-identity-title">
+            <div className="opencred-section-head">
+              <p>01 / Identity system</p>
+              <h2 id="opencred-identity-title">Familiar enough to trust. Distinct enough to remember.</h2>
+              <p className="opencred-section-copy">
+                The final wordmark keeps AFC’s visual equity close while giving the
+                microfinance brand its own rhythm. The leaf carries the relationship;
+                the two greens make OPEN and CRED readable as separate ideas.
+              </p>
+            </div>
+            <div className="opencred-logo-grid">
+              <figure className="opencred-logo-card light">
+                <img src="/projects/opencred/logo-primary.svg" alt="Primary OpenCred Finance logo" />
+                <figcaption>Primary identity / approved artwork</figcaption>
+              </figure>
+              <figure className="opencred-logo-card dark">
+                <img src="/projects/opencred/logo-reversed.svg" alt="Reversed OpenCred Finance logo" />
+                <figcaption>Reversed identity / approved artwork</figcaption>
+              </figure>
+            </div>
+            <figure className="opencred-wide-figure">
+              <img
+                src="/projects/opencred/typography.jpg"
+                alt="OpenCred brand guide typography page showing the Avenir family"
+                loading="lazy"
+              />
+              <figcaption>Brand guide / Avenir typography system</figcaption>
+            </figure>
+          </section>
+
+          <section className="opencred-section opencred-social" aria-labelledby="opencred-social-title">
+            <div className="opencred-section-head">
+              <p>02 / Social system</p>
+              <h2 id="opencred-social-title">A financial brand still needs a human voice.</h2>
+              <p className="opencred-section-copy">
+                The social system translates credibility into clear, direct communication:
+                strong headlines, generous scale and a consistent frame built from the leaf.
+              </p>
+            </div>
+            <div className="opencred-social-grid">
+              <figure>
+                <img
+                  src="/projects/opencred/social-finance-works.jpg"
+                  alt="OpenCred social artwork with the headline Finance That Works for You"
+                  loading="lazy"
+                />
+                <figcaption>Brand promise</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/projects/opencred/social-everyday-needs.jpg"
+                  alt="OpenCred social artwork explaining support for everyday needs"
+                  loading="lazy"
+                />
+                <figcaption>Product information</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/projects/opencred/social-stand-strong.jpg"
+                  alt="OpenCred social artwork with the headline Stand Strong"
+                  loading="lazy"
+                />
+                <figcaption>Campaign expression</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section className="opencred-section opencred-spatial" aria-labelledby="opencred-spatial-title">
+            <div className="opencred-section-head">
+              <p>03 / Spatial direction</p>
+              <h2 id="opencred-spatial-title">The identity was designed to live beyond the logo.</h2>
+              <p className="opencred-section-copy">
+                Signage and interior visualisations tested how the system could move from
+                screens into customer-facing spaces while remaining recognisably OpenCred.
+              </p>
+            </div>
+            <figure className="opencred-spatial-feature">
+              <img
+                src="/projects/opencred/spatial-signage.jpg"
+                alt="OpenCred acrylic signage visualisation"
+                loading="lazy"
+              />
+              <figcaption>Signage application visualisation</figcaption>
+            </figure>
+            <div className="opencred-spatial-grid">
+              <figure>
+                <img
+                  src="/projects/opencred/spatial-branch.jpg"
+                  alt="OpenCred customer branch interior visualisation"
+                  loading="lazy"
+                />
+                <figcaption>Customer space visualisation</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/projects/opencred/spatial-office.jpg"
+                  alt="OpenCred office wall identity visualisation"
+                  loading="lazy"
+                />
+                <figcaption>Office identity visualisation</figcaption>
+              </figure>
+            </div>
+          </section>
+        </>
+      )}
+
       <section className="case-process">
         <div>
-          <p>Asset plan / case study in progress</p>
-          <h2>Next, the real work replaces every holding frame.</h2>
+          <p>{isOpenCred ? "Design response / final system" : "Asset plan / case study in progress"}</p>
+          <h2>{isOpenCred ? "The constraint became the direction." : "Next, the real work replaces every holding frame."}</h2>
         </div>
         <ol>
           {project.nextAssets.map((asset, assetIndex) => (
@@ -91,6 +200,17 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </article>
         ))}
       </section>
+
+      {isOpenCred && (
+        <section className="opencred-credit">
+          <p>Project credit</p>
+          <p>
+            OpenCred Finance, an AFC Commercial Bank product. Visual identity designed by
+            Denzel Maupa at Jericho Advertising. Naming developed collaboratively with the
+            Jericho team and AFC Commercial Bank’s marketing team.
+          </p>
+        </section>
+      )}
 
       <section className="case-metrics" aria-label="Project highlights">
         {project.highlights.map((highlight) => (

@@ -356,6 +356,112 @@ footer { min-height: 820px; display: flex; flex-direction: column; }
 .case-services { border-top: 1px solid var(--ink); }
 .case-services p { margin: 0; padding: 13px 0; display: flex; gap: 26px; border-bottom: 1px solid var(--ink); font-size: 9px; text-transform: uppercase; letter-spacing: .06em; }
 .case-services span { color: var(--stone); }
+.opencred-real-hero {
+  position: absolute;
+  inset: 0;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #096a3a;
+  color: #f2efe8;
+}
+.opencred-real-hero::before,
+.opencred-real-hero::after {
+  content: "";
+  position: absolute;
+  width: 64%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #8ec740;
+}
+.opencred-real-hero::before { top: -48%; right: -18%; }
+.opencred-real-hero::after { left: -34%; bottom: -70%; opacity: .92; }
+.opencred-real-hero > p,
+.opencred-hero-meta,
+.opencred-real-hero > img { position: relative; z-index: 1; }
+.opencred-real-hero > p { margin: 0; font-size: 9px; letter-spacing: .08em; }
+.opencred-real-hero > img {
+  width: min(70%, 920px);
+  height: auto;
+  margin: auto;
+}
+.opencred-hero-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(242,239,232,.5);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+.opencred-section { padding: 120px 28px; border-bottom: 1px solid var(--ink); }
+.opencred-section-head {
+  display: grid;
+  grid-template-columns: .55fr 1.15fr .7fr;
+  gap: 5vw;
+  align-items: start;
+  margin-bottom: 90px;
+}
+.opencred-section-head > p:first-child,
+.opencred-section figcaption,
+.opencred-credit > p:first-child {
+  margin: 0;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+.opencred-section-head h2 {
+  max-width: 11ch;
+  margin: 0;
+  font: 400 clamp(48px, 6vw, 92px)/.88 var(--font-serif);
+  letter-spacing: -.05em;
+}
+.opencred-section-copy { max-width: 48ch; margin: 0; font-size: 11px; line-height: 1.65; }
+.opencred-logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--ink); border: 1px solid var(--ink); }
+.opencred-logo-card {
+  min-height: 520px;
+  margin: 0;
+  padding: 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.opencred-logo-card.light { background: #f2efe8; color: #11110f; }
+.opencred-logo-card.dark { background: #096a3a; color: #f2efe8; }
+.opencred-logo-card img { width: min(78%, 620px); height: auto; margin: auto; }
+.opencred-section figcaption { padding-top: 16px; border-top: 1px solid currentColor; }
+.opencred-wide-figure { margin: 28px 0 0; }
+.opencred-wide-figure img { display: block; width: 100%; aspect-ratio: 1.7; object-fit: cover; }
+.opencred-wide-figure figcaption { margin-top: 12px; }
+.opencred-social { background: #096a3a; color: #f2efe8; }
+.opencred-social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.opencred-social-grid figure { margin: 0; }
+.opencred-social-grid img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+.opencred-social-grid figcaption { margin-top: 12px; border-color: rgba(242,239,232,.5); }
+.opencred-spatial { background: #d0cdc5; }
+.opencred-spatial-feature { margin: 0 0 28px; }
+.opencred-spatial-feature img,
+.opencred-spatial-grid img { display: block; width: 100%; object-fit: cover; }
+.opencred-spatial-feature img { aspect-ratio: 1.65; }
+.opencred-spatial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.opencred-spatial-grid figure { margin: 0; }
+.opencred-spatial-grid img { aspect-ratio: 1.45; }
+.opencred-spatial-feature figcaption,
+.opencred-spatial-grid figcaption { margin-top: 12px; }
+.opencred-credit {
+  padding: 0 28px 130px;
+  display: grid;
+  grid-template-columns: .55fr 1.45fr;
+  gap: 5vw;
+}
+.opencred-credit > p:last-child {
+  max-width: 30ch;
+  margin: 0;
+  font: 400 clamp(30px, 3.3vw, 52px)/1 var(--font-serif);
+  letter-spacing: -.03em;
+}
 .case-process { padding: 120px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 8vw; background: var(--ink); color: var(--paper); }
 .case-process > div > p { margin: 0 0 70px; font-size: 9px; text-transform: uppercase; letter-spacing: .07em; color: #97938a; }
 .case-process h2 { max-width: 10ch; margin: 0; font: 400 clamp(50px, 6.2vw, 98px)/.86 var(--font-serif); letter-spacing: -.05em; }
@@ -537,6 +643,10 @@ footer { min-height: 820px; display: flex; flex-direction: column; }
   .case-facts div:nth-child(3) { padding-left: 0; }
   .case-process { grid-template-columns: 1fr; }
   .case-process h2 { margin-bottom: 90px; }
+  .opencred-section-head { grid-template-columns: 1fr 1fr; }
+  .opencred-section-head > p:first-child { grid-column: 1 / -1; }
+  .opencred-social-grid { grid-template-columns: 1fr 1fr; }
+  .opencred-social-grid figure:last-child { grid-column: 1 / -1; width: calc(50% - 8px); }
   .case-story { grid-template-columns: 1fr; gap: 72px; }
   .case-story article > p:last-child { max-width: 28ch; margin-top: 30px; }
   .about-body { grid-template-columns: 1fr; }
@@ -659,6 +769,24 @@ footer { min-height: 820px; display: flex; flex-direction: column; }
   .case-process { padding: 80px 16px; }
   .case-process h2 { margin-bottom: 70px; font-size: 50px; }
   .case-process li { grid-template-columns: 38px 1fr; }
+  .opencred-real-hero { padding: 16px; }
+  .opencred-real-hero > img { width: 92%; }
+  .opencred-hero-meta { flex-direction: column; gap: 8px; }
+  .opencred-hero-meta span:last-child { max-width: 30ch; }
+  .opencred-section { padding: 80px 16px; }
+  .opencred-section-head { grid-template-columns: 1fr; gap: 28px; margin-bottom: 54px; }
+  .opencred-section-head > p:first-child { grid-column: auto; }
+  .opencred-section-head h2 { font-size: 50px; }
+  .opencred-logo-grid,
+  .opencred-social-grid,
+  .opencred-spatial-grid { grid-template-columns: 1fr; }
+  .opencred-logo-card { min-height: 360px; padding: 24px; }
+  .opencred-logo-card img { width: 92%; }
+  .opencred-wide-figure img { aspect-ratio: 1.15; }
+  .opencred-social-grid figure:last-child { grid-column: auto; width: auto; }
+  .opencred-spatial-feature img,
+  .opencred-spatial-grid img { aspect-ratio: 1.2; }
+  .opencred-credit { padding: 0 16px 90px; grid-template-columns: 1fr; gap: 34px; }
   .case-metrics { padding: 0 16px 90px; grid-template-columns: 1fr; }
   .case-metrics div, .case-metrics div + div { min-height: 180px; padding: 24px 0; border-right: 0; border-bottom: 1px solid var(--ink); }
   .palette-section { height: 520px; grid-template-columns: 1fr 1fr; }

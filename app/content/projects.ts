@@ -27,53 +27,54 @@ export const projects: Project[] = [
     title: "OpenCred Finance",
     category: "Naming + brand identity",
     discipline: "Graphic design",
-    year: "Recent",
+    year: "2025—2026",
     description:
-      "A new microfinance brand developed at Jericho Advertising, with the visual identity led from logo to rollout system.",
+      "AFC Commercial Bank’s microfinance identity, designed to make accessible finance feel modern and approachable while carrying forward the trust of an established national bank.",
     className: "opencred",
     client: "OpenCred Finance / AFC Commercial Bank",
     location: "Zimbabwe",
     role: "Lead and sole designer",
     context: "Agency project / Jericho Advertising",
-    team: "Strategy, copy and account teams at Jericho",
+    team: "Jericho + AFC Commercial Bank marketing",
     headline:
-      "Turning a collaboratively developed name into a clear, credible and usable financial identity.",
+      "Connected to AFC. Distinct enough to stand on its own.",
     verifiedNotes: [
       {
-        label: "Context",
+        label: "The challenge",
         text:
-          "The OpenCred name was developed collaboratively within the agency. The wider project was a team effort across Jericho Advertising.",
+          "The identity had to inherit AFC Commercial Bank’s credibility without simply becoming another expression of the parent brand. The answer was already present in AFC’s visual heritage: its greens, leaf motif and long-standing relationship with customers across Zimbabwe.",
       },
       {
-        label: "My contribution",
+        label: "The response",
         text:
-          "I was the lead and only designer. I created the logo and identity, brand guide, presentation mockups, social media look and the wider visual language.",
+          "I used the palette and leaf as familiar anchors, then gave OpenCred a more modern, approachable voice. The two-tone wordmark creates a clear visual break between OPEN and CRED, balancing accessibility with financial credibility.",
       },
       {
-        label: "Case-study status",
+        label: "What I learned",
         text:
-          "The visual story is ready to be assembled once the approved identity files, guide pages and rollout mockups are added to this portfolio.",
+          "Good visual communication is not only about how something looks, but how it sounds. This project made me ask what a brand’s voice is saying, why people should trust it and how every detail can repeat that message consistently.",
       },
     ],
     services: [
+      "Naming collaboration",
       "Logo design",
       "Visual identity",
       "Brand guidelines",
-      "Mockup direction",
       "Social media system",
+      "Spatial identity direction",
     ],
     nextAssets: [
-      "Final logo files",
-      "Selected brand-guide spreads",
-      "Best identity mockups",
-      "Approved social applications",
+      "Use AFC’s established greens to carry recognition and trust",
+      "Retain the leaf motif as a link to the parent brand’s heritage",
+      "Separate OPEN and CRED through the two-tone wordmark",
+      "Scale one visual voice across guidelines, social media and space",
     ],
     highlights: [
-      { value: "Lead", label: "design role" },
-      { value: "01", label: "designer" },
-      { value: "Full", label: "visual system" },
+      { value: "2025", label: "identity completed" },
+      { value: "JAN ’26", label: "brand launched" },
+      { value: "01", label: "lead designer" },
     ],
-    palette: ["#15372f", "#e9f36a", "#f2efe8", "#11110f"],
+    palette: ["#096A3A", "#8EC740", "#F2EFE8", "#11110F"],
   },
   {
     number: "02",

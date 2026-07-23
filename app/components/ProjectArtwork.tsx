@@ -4,17 +4,17 @@ export function ProjectArtwork({ project }: { project: Project }) {
   if (project.className === "opencred") {
     return (
       <>
-        <div className="opencred-kicker">IDENTITY / FINANCE / ZIMBABWE</div>
-        <div className="opencred-word">
-          OPEN<span>CRED</span>
+        <div className="opencred-real-hero">
+          <p>BRAND IDENTITY / MICROFINANCE / ZIMBABWE</p>
+          <img
+            src="/projects/opencred/logo-reversed.svg"
+            alt="OpenCred Finance"
+          />
+          <div className="opencred-hero-meta">
+            <span>A product of AFC Commercial Bank</span>
+            <span>Identity completed 2025 / Launched January 2026</span>
+          </div>
         </div>
-        <div className="opencred-window">
-          <p>VISUAL SYSTEM</p>
-          <div><span>01</span><b>LOGO</b></div>
-          <div><span>02</span><b>GUIDE</b></div>
-          <div><span>03</span><b>SOCIAL</b></div>
-        </div>
-        <div className="opencred-mark" aria-hidden="true">O/C</div>
       </>
     );
   }
