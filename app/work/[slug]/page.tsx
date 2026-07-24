@@ -26,6 +26,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const index = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(index + 1) % projects.length];
   const isOpenCred = project.slug === "opencred-finance";
+  const isTm = project.slug === "tm-pick-n-pay-billboard";
 
   return (
     <main className="interior-page" id="top">
@@ -180,10 +181,137 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </>
       )}
 
+      {isTm && (
+        <>
+          <section className="tm-case-section tm-context" aria-labelledby="tm-context-title">
+            <div className="tm-case-head">
+              <p>01 / Campaign context</p>
+              <h2 id="tm-context-title">Before designing forward, I had to understand what already worked.</h2>
+              <p>
+                “Real Value Always” already had strong outdoor equity. The 2023
+                execution relied on clear branding and restraint; the 2025 billboard
+                used a more elaborate 3D wordmark and flying products. These are
+                campaign references—not designs I claim as my own.
+              </p>
+            </div>
+            <div className="tm-context-grid">
+              <figure>
+                <img
+                  src="/projects/tm-pick-n-pay/context-2023.jpg"
+                  alt="TM Pick n Pay 2023 Real Value Always billboard campaign reference"
+                  loading="lazy"
+                />
+                <figcaption>2023 / Campaign reference / supplied for context</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/projects/tm-pick-n-pay/context-2025.jpg"
+                  alt="TM Pick n Pay 2025 three-dimensional Real Value Always billboard campaign reference"
+                  loading="lazy"
+                />
+                <figcaption>2025 / Campaign reference / supplied for context</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section className="tm-case-section tm-idea" aria-labelledby="tm-idea-title">
+            <div className="tm-case-head">
+              <p>02 / The selected idea</p>
+              <h2 id="tm-idea-title">Recognise the value before reading about it.</h2>
+              <p>
+                Rather than placing a bag on the billboard, I made the entire
+                billboard the bag. Its kraft-paper texture, oversized handle and
+                abundance of familiar products turn an everyday shopping object
+                into the campaign’s central message.
+              </p>
+            </div>
+            <figure className="tm-artwork-feature">
+              <img
+                src="/projects/tm-pick-n-pay/final-artwork.jpg"
+                alt="Final TM Pick n Pay Real Value Always billboard artwork"
+                loading="lazy"
+              />
+              <figcaption>Selected direction / final landscape artwork</figcaption>
+            </figure>
+          </section>
+
+          <section className="tm-case-section tm-routes" aria-labelledby="tm-routes-title">
+            <div className="tm-case-head">
+              <p>03 / Alternative routes</p>
+              <h2 id="tm-routes-title">Three answers to the same brief.</h2>
+              <p>
+                Agency review called for multiple directions. Alongside the bag
+                concept, I explored a digital-service story built around Click n
+                Collect and a dimensional treatment that evolved the earlier
+                wordmark-led campaign. The first route remained the clearest.
+              </p>
+            </div>
+            <div className="tm-route-grid">
+              <figure>
+                <img
+                  src="/projects/tm-pick-n-pay/concept-click-collect.jpg"
+                  alt="Alternative TM Pick n Pay billboard concept focused on Click n Collect delivery"
+                  loading="lazy"
+                />
+                <figcaption>Exploration 02 / Click n Collect</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/projects/tm-pick-n-pay/concept-3d-wordmark.jpg"
+                  alt="Alternative TM Pick n Pay billboard concept using a three-dimensional Real Value Always wordmark"
+                  loading="lazy"
+                />
+                <figcaption>Exploration 03 / Dimensional wordmark</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section className="tm-case-section tm-rollout" aria-labelledby="tm-rollout-title">
+            <div className="tm-case-head">
+              <p>04 / Format system</p>
+              <h2 id="tm-rollout-title">One idea, built to survive very different proportions.</h2>
+              <p>
+                The hierarchy stays recognisable as the campaign moves from long
+                landscape boards to tall portrait formats. Live-site photographs
+                will replace these mock-ups when the final selection is ready.
+              </p>
+            </div>
+            <figure className="tm-rollout-feature">
+              <img
+                src="/projects/tm-pick-n-pay/final-landscape-mockup.jpg"
+                alt="Landscape TM Pick n Pay billboard mock-up"
+                loading="lazy"
+              />
+              <figcaption>Landscape application / temporary mock-up</figcaption>
+            </figure>
+            <figure className="tm-rollout-portrait">
+              <img
+                src="/projects/tm-pick-n-pay/final-portrait-mockup.jpg"
+                alt="Portrait TM Pick n Pay billboard mock-up"
+                loading="lazy"
+              />
+              <figcaption>Portrait application / temporary mock-up</figcaption>
+            </figure>
+          </section>
+        </>
+      )}
+
       <section className="case-process">
         <div>
-          <p>{isOpenCred ? "Design response / final system" : "Asset plan / case study in progress"}</p>
-          <h2>{isOpenCred ? "The constraint became the direction." : "Next, the real work replaces every holding frame."}</h2>
+          <p>
+            {isOpenCred
+              ? "Design response / final system"
+              : isTm
+                ? "Outdoor principles / final system"
+                : "Asset plan / case study in progress"}
+          </p>
+          <h2>
+            {isOpenCred
+              ? "The constraint became the direction."
+              : isTm
+                ? "Designed to land before the next exit."
+                : "Next, the real work replaces every holding frame."}
+          </h2>
         </div>
         <ol>
           {project.nextAssets.map((asset, assetIndex) => (
@@ -201,14 +329,22 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         ))}
       </section>
 
-      {isOpenCred && (
+      {(isOpenCred || isTm) && (
         <section className="opencred-credit">
           <p>Project credit</p>
-          <p>
-            OpenCred Finance, an AFC Commercial Bank product. Visual identity designed by
-            Denzel Maupa at Jericho Advertising. Naming developed collaboratively with the
-            Jericho team and AFC Commercial Bank’s marketing team.
-          </p>
+          {isOpenCred ? (
+            <p>
+              OpenCred Finance, an AFC Commercial Bank product. Visual identity designed by
+              Denzel Maupa at Jericho Advertising. Naming developed collaboratively with the
+              Jericho team and AFC Commercial Bank’s marketing team.
+            </p>
+          ) : (
+            <p>
+              TM Pick n Pay “Real Value Always” billboard concept and execution
+              designed by Denzel Maupa at Jericho Advertising. Earlier campaign
+              references are shown only to explain the creative context.
+            </p>
+          )}
         </section>
       )}
 

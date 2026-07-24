@@ -21,19 +21,16 @@ export function ProjectArtwork({ project }: { project: Project }) {
 
   if (project.className === "tm-billboard") {
     return (
-      <>
-        <div className="tm-kicker">OUT-OF-HOME / AGENCY PROJECT</div>
-        <div className="tm-landscape">
-          <div className="tm-sky" />
-          <div className="tm-board">
-            <span>TM PICK N PAY</span>
-            <strong>READS<br />AT SPEED.</strong>
-            <i>BILLBOARD DESIGN / ZIMBABWE</i>
-          </div>
-          <div className="tm-road"><span /><span /><span /></div>
+      <div className="tm-real-hero">
+        <img
+          src="/projects/tm-pick-n-pay/final-landscape-mockup.jpg"
+          alt="TM Pick n Pay Real Value Always brown shopping bag billboard mock-up"
+        />
+        <div className="tm-real-hero-meta">
+          <span>OUT-OF-HOME / NATIONWIDE / ZIMBABWE</span>
+          <span>Concept developed January—February 2026 / Rollout from March 2026</span>
         </div>
-        <div className="tm-caption">LIVE WORK / PHOTOGRAPHY TO FOLLOW</div>
-      </>
+      </div>
     );
   }
 

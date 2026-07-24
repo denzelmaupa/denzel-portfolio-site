@@ -82,9 +82,9 @@ export const projects: Project[] = [
     title: "TM Pick n Pay",
     category: "Outdoor advertising",
     discipline: "Graphic design",
-    year: "Recent",
+    year: "2026",
     description:
-      "A billboard designed for TM Pick n Pay at Jericho Advertising, prepared for a fuller story using live-site photography and video.",
+      "A nationwide billboard campaign for TM Pick n Pay, turning a familiar brown shopping bag into a simple, oversized expression of “Real Value Always.”",
     className: "tm-billboard",
     client: "TM Pick n Pay",
     location: "Zimbabwe",
@@ -92,42 +92,43 @@ export const projects: Project[] = [
     context: "Agency project / Jericho Advertising",
     team: "Jericho Advertising",
     headline:
-      "Designing for the few seconds in which an outdoor message has to land.",
+      "The whole billboard became the shopping bag.",
     verifiedNotes: [
       {
-        label: "Context",
+        label: "The challenge",
         text:
-          "This billboard was created within Jericho Advertising for TM Pick n Pay. Permission has been granted to present the work.",
+          "The campaign had to follow two established “Real Value Always” billboards: a deliberately simple brand-led execution in 2023 and a more elaborate 3D wordmark in 2025. The new idea needed to feel just as immediate without repeating either approach.",
       },
       {
-        label: "My contribution",
+        label: "The idea",
         text:
-          "I designed the billboard and can document the work from source files, mockups, photographs and video of the finished placement.",
+          "I visualised value as a familiar TM Pick n Pay brown shopping bag filled with everyday products, then allowed that bag to become the billboard itself. The object, the product abundance and the payoff line can be understood in a single glance.",
       },
       {
-        label: "Case-study status",
+        label: "The outcome",
         text:
-          "The final page will pair the artwork with real-world scale, a concise design rationale and the approved project context.",
+          "My first direction was selected during the first client review. It was adapted across more than 25 production formats for a nationwide rollout beginning in March 2026—an especially meaningful moment on a brand of this scale.",
       },
     ],
     services: [
-      "Outdoor advertising",
-      "Visual communication",
-      "Layout and typography",
-      "Production artwork",
+      "Outdoor concept development",
+      "Art direction",
+      "Image composition",
+      "Typography and hierarchy",
+      "Production adaptation",
     ],
     nextAssets: [
-      "Final billboard artwork",
-      "Best daylight photograph",
-      "Best night or traffic photograph",
-      "Short location video",
+      "Build recognition before asking the audience to read",
+      "Turn one familiar object into the complete visual idea",
+      "Use oversized products and branding for highway-speed clarity",
+      "Keep the system flexible across more than 25 billboard formats",
     ],
     highlights: [
-      { value: "OOH", label: "primary format" },
-      { value: "Live", label: "real-world work" },
-      { value: "Yes", label: "permission cleared" },
+      { value: "01", label: "selected direction" },
+      { value: "25+", label: "production formats" },
+      { value: "MAR ’26", label: "rollout began" },
     ],
-    palette: ["#d71920", "#f2efe8", "#0b7a3e", "#f4d12b"],
+    palette: ["#0C3B66", "#C8102E", "#B78750", "#F4F0E8"],
   },
   {
     number: "03",
