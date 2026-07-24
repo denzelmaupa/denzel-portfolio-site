@@ -5,6 +5,19 @@ import * as THREE from "three";
 import { ProjectArtwork } from "./components/ProjectArtwork";
 import { projects } from "./content/projects";
 
+const clientBrands = [
+  { name: "TM Pick n Pay", slug: "tm-pnp" },
+  { name: "Nando’s", slug: "nandos" },
+  { name: "AFC Commercial Bank", slug: "afc" },
+  { name: "National Foods", slug: "national-foods" },
+  { name: "Zimbabwe Stock Exchange", slug: "zse" },
+  { name: "Edgars", slug: "edgars" },
+  { name: "Transerv", slug: "transerv" },
+  { name: "OpenCred Finance", slug: "opencred" },
+  { name: "Kutsaga", slug: "kutsaga" },
+  { name: "TATU Capital", slug: "tatu-capital" },
+];
+
 function HeroSculpture() {
   const mountRef = useRef<HTMLDivElement>(null);
 
@@ -400,6 +413,36 @@ export default function Home() {
           <span aria-hidden="true">Identity systems</span><b aria-hidden="true">✦</b><span aria-hidden="true">Art direction</span><b aria-hidden="true">✦</b><span aria-hidden="true">Editorial design</span><b aria-hidden="true">✦</b><span aria-hidden="true">Digital experiences</span><b aria-hidden="true">✦</b>
         </div>
       </div>
+
+      <section className="brand-carousel" aria-label="Selected client experience at Jericho Advertising">
+        <div className="brand-carousel-label">
+          <p>Selected brands I’ve worked on through Jericho Advertising.</p>
+          <span>Agency experience / Harare</span>
+        </div>
+        <div className="brand-carousel-window">
+          <div className="brand-carousel-track">
+            {[false, true].map((duplicate) => (
+              <div className="brand-carousel-sequence" aria-hidden={duplicate || undefined} key={duplicate ? "duplicate" : "primary"}>
+                {clientBrands.map((brand) => (
+                  <figure className="brand-carousel-item" key={`${duplicate ? "duplicate-" : ""}${brand.slug}`}>
+                    <img
+                      className="brand-logo brand-logo-white"
+                      src={`/brands/${brand.slug}-white.svg`}
+                      alt={duplicate ? "" : brand.name}
+                    />
+                    <img
+                      className="brand-logo brand-logo-colour"
+                      src={`/brands/${brand.slug}-colour.svg`}
+                      alt=""
+                      aria-hidden="true"
+                    />
+                  </figure>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="work-section" id="work">
         <div className="section-heading" data-reveal>
