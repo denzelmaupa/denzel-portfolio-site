@@ -116,26 +116,26 @@ function HeroSculpture() {
         context.strokeRect(120, 824, 652, 62);
         context.fillText("PHOTOS / VIDEO / MOCKUPS", 160, 864);
       } else {
-        context.font = "162px Georgia, serif";
-        context.letterSpacing = "-12px";
-        context.fillText("SYMPHONY", 34, 410);
-        context.strokeStyle = palette.foreground;
-        context.lineWidth = 4;
-        context.strokeRect(54, 610, 792, 330);
+        context.font = "150px Georgia, serif";
+        context.letterSpacing = "-10px";
+        context.fillText("STUDIO", 34, 355);
         context.fillStyle = palette.accent;
-        context.fillRect(54, 610, 244, 330);
+        context.fillText("PORTAL", 220, 500);
+        context.strokeStyle = palette.foreground;
+        context.lineWidth = 3;
+        context.strokeRect(54, 610, 792, 300);
+        context.fillStyle = palette.accent;
+        context.fillRect(54, 610, 120, 300);
         context.fillStyle = palette.foreground;
-        context.beginPath();
-        context.arc(440, 760, 86, 0, Math.PI * 2);
-        context.fill();
-        context.beginPath();
-        context.arc(650, 760, 120, 0, Math.PI * 2);
-        context.stroke();
+        context.fillRect(208, 654, 250, 62);
+        context.fillRect(486, 654, 304, 62);
+        context.fillRect(208, 750, 582, 34);
+        context.fillRect(208, 814, 400, 34);
         context.fillStyle = palette.foreground;
         context.font = "26px ui-monospace, SFMono-Regular, Menlo, monospace";
         context.letterSpacing = "2px";
-        context.fillText("FLAVOUR / RHYTHM / IDENTITY", 54, 1014);
-        context.fillText("INDEPENDENT PROJECT", 54, 1056);
+        context.fillText("JOBS / TIME / REPORTING", 54, 1014);
+        context.fillText("PRODUCT DESIGN / BUILD", 54, 1056);
       }
 
       const texture = new THREE.CanvasTexture(canvas);

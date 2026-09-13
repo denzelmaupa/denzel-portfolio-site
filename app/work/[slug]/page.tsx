@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectArtwork } from "../../components/ProjectArtwork";
+import { StudioPortalCaseStudy } from "../../components/StudioPortalCaseStudy";
 import { getProject, projects } from "../../content/projects";
 
 type ProjectPageProps = { params: Promise<{ slug: string }> };
@@ -27,6 +28,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const nextProject = projects[(index + 1) % projects.length];
   const isOpenCred = project.slug === "opencred-finance";
   const isTm = project.slug === "tm-pick-n-pay-billboard";
+  const isPortal = project.slug === "jericho-studio-portal";
 
   return (
     <main className="interior-page" id="top">
@@ -296,6 +298,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </>
       )}
 
+      {isPortal && <StudioPortalCaseStudy />}
+
       <section className="case-process">
         <div>
           <p>
@@ -303,14 +307,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               ? "Design response / final system"
               : isTm
                 ? "Outdoor principles / final system"
-                : "Asset plan / case study in progress"}
+                : "Product principles / live system"}
           </p>
           <h2>
             {isOpenCred
               ? "The constraint became the direction."
               : isTm
                 ? "Designed to land before the next exit."
-                : "Next, the real work replaces every holding frame."}
+                : "One source of truth, shaped around five roles."}
           </h2>
         </div>
         <ol>
@@ -329,7 +333,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         ))}
       </section>
 
-      {(isOpenCred || isTm) && (
+      {(isOpenCred || isTm || isPortal) && (
         <section className="opencred-credit">
           <p>Project credit</p>
           {isOpenCred ? (
@@ -338,11 +342,17 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               Denzel Maupa at Jericho Advertising. Naming developed collaboratively with the
               Jericho team and AFC Commercial Bank’s marketing team.
             </p>
-          ) : (
+          ) : isTm ? (
             <p>
               TM Pick n Pay “Real Value Always” billboard concept and execution
               designed by Denzel Maupa at Jericho Advertising. Earlier campaign
               references are shown only to explain the creative context.
+            </p>
+          ) : (
+            <p>
+              Jericho Studio Portal was conceived, designed and built by Denzel Maupa
+              for Jericho Advertising. Leadership and team feedback informed later
+              workflows. The live system and its data remain private.
             </p>
           )}
         </section>

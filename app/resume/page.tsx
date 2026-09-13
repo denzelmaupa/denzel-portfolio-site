@@ -51,10 +51,10 @@ const selectedWork = [
       "Designed a live outdoor billboard for TM Pick n Pay, with permission to present the work and document it through final artwork, photography and video.",
   },
   {
-    title: "AI Surveillance Concept",
-    meta: "Team Lead — UI/UX + Graphic Design / First Prize, 2023",
+    title: "Jericho Studio Portal",
+    meta: "Product Designer + AI-Assisted Developer / In-house product",
     copy:
-      "Led the interface and visual design for a hackathon concept using image recognition to flag potential security and safety risks.",
+      "Designed and built a role-based agency workflow system for jobs, time, revisions and billing. The React and Supabase product serves 14 users across five role groups.",
   },
 ];
 
@@ -130,7 +130,8 @@ export default function ResumePage() {
                 Adobe Photoshop / Illustrator / InDesign<br />
                 HTML &amp; CSS<br />
                 React / Next.js<br />
-                Supabase
+                Supabase<br />
+                ChatGPT / Antigravity
               </p>
             </section>
 

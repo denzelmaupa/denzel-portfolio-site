@@ -6,7 +6,7 @@ export type Project = {
   discipline: "Graphic design" | "UI/UX design" | "Brand + product";
   year: string;
   description: string;
-  className: "opencred" | "tm-billboard" | "symphony";
+  className: "opencred" | "tm-billboard" | "studio-portal";
   client: string;
   location: string;
   role: string;
@@ -132,56 +132,59 @@ export const projects: Project[] = [
   },
   {
     number: "03",
-    slug: "symphony-spices",
-    title: "Symphony Spices",
-    category: "Independent brand project",
-    discipline: "Graphic design",
-    year: "Personal",
+    slug: "jericho-studio-portal",
+    title: "Jericho Studio Portal",
+    category: "Internal product system",
+    discipline: "UI/UX design",
+    year: "2025—2026",
     description:
-      "An independent project selected to show a more personal side of the practice beyond agency work.",
-    className: "symphony",
-    client: "Independent project",
+      "An internal agency platform that grew from a personal timer into a role-based system for jobs, time, revisions, reporting and billable hours.",
+    className: "studio-portal",
+    client: "Jericho Advertising",
     location: "Harare, Zimbabwe",
-    role: "Designer",
-    context: "Personal work",
-    team: "Self-directed",
+    role: "Product designer + AI-assisted developer",
+    context: "In-house product / Jericho Advertising",
+    team: "Denzel Maupa + Jericho leadership and team",
     headline:
-      "A personal project where flavour, rhythm and visual identity meet.",
+      "A personal timer became an agency-wide operating system.",
     verifiedNotes: [
       {
-        label: "Context",
+        label: "The problem",
         text:
-          "Symphony Spices is personal work and gives the portfolio space for a project that can be discussed without agency restrictions.",
+          "Missed deadlines and disconnected records made it difficult to understand where time was going, what was billable and who needed to act next. The first idea was a timer for my own work; mapping the wider problem revealed an opportunity for the whole agency.",
       },
       {
-        label: "My contribution",
+        label: "The system",
         text:
-          "The project is self-directed. Its exact scope, process and final applications will be documented from the original files.",
+          "I designed role-specific experiences for designers, social media and client managers, traffic, accounts and administration. Jobs now move through one shared system with assignment, timers, revisions, timesheets, reporting and pro-rata billing logic.",
       },
       {
-        label: "Case-study status",
+        label: "The build",
         text:
-          "This page currently acts as an honest holding structure until the strongest visuals and the original creative rationale are selected.",
+          "I defined the product requirements, workflows, interface and data relationships, then used Antigravity with Claude Sonnet and Gemini Flash to accelerate React development, Supabase implementation, testing and debugging. The product has been in full use since June 2026.",
       },
     ],
     services: [
-      "Creative direction",
-      "Brand expression",
-      "Packaging exploration",
-      "Art direction",
+      "Product strategy",
+      "Workflow mapping",
+      "UI/UX design",
+      "Role and access architecture",
+      "AI-assisted React development",
+      "Supabase implementation",
+      "Testing and deployment",
     ],
     nextAssets: [
-      "Original concept notes",
-      "Final identity artwork",
-      "Packaging or application mockups",
-      "Process sketches",
+      "Start with the smallest real problem, then map the wider system",
+      "Show each role only the work and actions relevant to them",
+      "Connect jobs, changes, timers and timesheets in one workflow",
+      "Turn captured time into useful traffic and billing reports",
     ],
     highlights: [
-      { value: "Self", label: "directed" },
-      { value: "Open", label: "creative scope" },
-      { value: "Next", label: "case study to build" },
+      { value: "14", label: "active team users" },
+      { value: "05", label: "role groups" },
+      { value: "06", label: "months to full rollout" },
     ],
-    palette: ["#642418", "#e7a93f", "#334126", "#f2e7d2"],
+    palette: ["#192843", "#CF0A2C", "#2463EB", "#F5F6F9"],
   },
 ];
 
