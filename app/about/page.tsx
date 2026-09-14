@@ -29,7 +29,7 @@ export default function AboutPage() {
         <div className="about-copy">
           <p className="about-lead">I’m Denzel Maupa, a Zimbabwean graphic designer and visual communicator based in Harare.</p>
           <p>Over the past few years, agency work has taken me through branding, advertising, large documents, magazines, social media, web, UI, photography and campaign design. It has also taught me that strong communication is as much about judgment as it is about aesthetics.</p>
-          <p>Graphic design is the centre of my current practice. I’m also certified in UI/UX and serious about growing that side of my work through research, interface systems and thoughtful digital experiences.</p>
+          <p>Graphic design is the centre of my practice, supported by certified UI/UX training and hands-on product work. I carry the same clarity into workflow mapping, interface systems, prototyping and digital experiences that have moved from concept into daily use.</p>
           <p>Music and sound shape how I think about rhythm, pause, repetition and energy. That sensibility sits behind my preference for work that feels modern and precise without losing warmth or character.</p>
           <a className="text-link" href="/contact">Start a conversation <span>↗</span></a>
         </div>

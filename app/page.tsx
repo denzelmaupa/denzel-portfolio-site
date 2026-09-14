@@ -30,11 +30,18 @@ function HeroSculpture() {
     const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
     camera.position.set(0, 0, 7.8);
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      powerPreference: "high-performance",
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+        powerPreference: "high-performance",
+      });
+    } catch {
+      const wrapper = mount.closest(".sculpture-wrap");
+      wrapper?.classList.add("is-fallback");
+      return () => wrapper?.classList.remove("is-fallback");
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -400,7 +407,7 @@ export default function Home() {
           <p className="eyebrow"><span>Open to thoughtful opportunities</span> / 2026</p>
           <h1>Maximised minimalism. <i>Creative simplicity.</i></h1>
           <div className="hero-foot">
-            <p>Graphic design and visual communication shaped by advertising, systems thinking and a growing UI/UX practice.</p>
+            <p>Graphic design and visual communication shaped by advertising, brand systems and shipped digital products.</p>
             <a href="#work" className="text-link">View selected work <span>↘</span></a>
           </div>
         </div>
@@ -487,8 +494,8 @@ export default function Home() {
           </article>
           <article data-reveal>
             <p>02 / UI/UX design</p>
-            <h2>Grow the digital practice.</h2>
-            <span>Certified in UI/UX and actively developing research, interaction design, prototyping and product thinking.</span>
+            <h2>Design how it works.</h2>
+            <span>Product strategy, workflow mapping, interface systems, prototyping and shipped digital experiences.</span>
           </article>
           <article data-reveal>
             <p>03 / Shared systems</p>

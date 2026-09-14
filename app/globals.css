@@ -79,6 +79,24 @@ h1 i, .studio-lead i, .contact-main i { font-weight: 400; }
 .poster-links a:hover, .poster-links a:focus-visible { background: var(--ink); color: var(--paper); transform: translateY(-3px); outline: none; }
 .poster-links a:hover span, .poster-links a:focus-visible span { color: var(--acid); }
 .mobile-project-intro { display: none; }
+.sculpture-wrap.is-fallback { min-height: 620px; padding: 48px 32px 28px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 7vw; align-items: end; background: var(--ink); color: var(--paper); cursor: default; }
+.sculpture-wrap.is-fallback .sculpture-grid,
+.sculpture-wrap.is-fallback .sculpture-halo,
+.sculpture-wrap.is-fallback .sculpture-canvas,
+.sculpture-wrap.is-fallback .sculpture-index,
+.sculpture-wrap.is-fallback .sculpture-note { display: none; }
+.sculpture-wrap.is-fallback::after { content: none; }
+.sculpture-wrap.is-fallback .mobile-project-intro { min-height: 500px; display: flex; flex-direction: column; }
+.sculpture-wrap.is-fallback .mobile-project-intro > p { margin: 0; color: #97938a; font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
+.sculpture-wrap.is-fallback .mobile-project-intro h2 { max-width: 7ch; margin: auto 0; font: 500 clamp(76px, 9vw, 142px)/.78 var(--font-serif); letter-spacing: -.055em; }
+.sculpture-wrap.is-fallback .mobile-project-intro h2 i { font-weight: 400; }
+.sculpture-wrap.is-fallback .mobile-project-intro > span { max-width: 34ch; color: #b9b5ac; font-size: 10px; line-height: 1.5; }
+.sculpture-wrap.is-fallback .poster-links { position: static; align-self: end; display: grid; gap: 0; }
+.sculpture-wrap.is-fallback .poster-links a { justify-content: space-between; padding: 18px 0; border: 0; border-top: 1px solid rgba(242,239,232,.35); border-radius: 0; background: transparent; color: var(--paper); backdrop-filter: none; font-size: 10px; }
+.sculpture-wrap.is-fallback .poster-links a:last-child { border-bottom: 1px solid rgba(242,239,232,.35); }
+.sculpture-wrap.is-fallback .poster-links a::after { content: "↗"; color: var(--acid); font-size: 14px; }
+.sculpture-wrap.is-fallback .poster-links a:hover,
+.sculpture-wrap.is-fallback .poster-links a:focus-visible { background: transparent; color: var(--paper); transform: none; }
 
 .ticker { overflow: hidden; border-bottom: 1px solid var(--ink); background: var(--orange); }
 .ticker-track { width: max-content; padding: 12px 0; display: flex; align-items: center; gap: 34px; font: 500 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .08em; animation: ticker 28s linear infinite; }
@@ -933,7 +951,7 @@ footer { min-height: 820px; display: flex; flex-direction: column; }
 @media (max-width: 600px) {
   .site-header, .hero-copy, .work-section, .studio-section, footer { padding-left: 16px; padding-right: 16px; }
   .site-header { min-height: auto; grid-template-columns: 1fr; align-items: center; gap: 20px; }
-  .site-header nav { width: calc(100vw - 32px); min-width: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; font-size: 8px; }
+  .site-header nav { width: 100%; min-width: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; font-size: 8px; }
   .site-header nav a { text-align: center; }
   .site-header nav a:first-child { text-align: left; }
   .site-header nav a:last-child { text-align: right; }

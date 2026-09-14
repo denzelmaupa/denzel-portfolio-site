@@ -93,8 +93,8 @@ export default function ResumePage() {
           <p className="resume-summary">
             Zimbabwean graphic designer with agency experience across brand identity, advertising,
             campaigns and multi-format visual systems. I combine clear communication, considered
-            craft and practical production thinking, with certified UI/UX training and a growing
-            digital-design practice spanning interface design and AI-assisted product prototyping.
+            craft and practical production thinking with certified UI/UX training, product design
+            and AI-assisted development of digital systems that have moved into daily use.
           </p>
           <div className="resume-contact">
             <a href="mailto:denzelmaupa@gmail.com">denzelmaupa@gmail.com</a>

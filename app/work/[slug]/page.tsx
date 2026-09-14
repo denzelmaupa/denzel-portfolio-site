@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { ProjectArtwork } from "../../components/ProjectArtwork";
 import { StudioPortalCaseStudy } from "../../components/StudioPortalCaseStudy";
@@ -14,9 +15,41 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
+  const requestHeaders = await headers();
+  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
+  const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+  const pageUrl = new URL(`/work/${project.slug}`, `${protocol}://${host}`).toString();
+  const imageUrl = new URL(project.socialImage, `${protocol}://${host}`).toString();
+  const socialTitle = `${project.title} — Denzel Maupa`;
   return {
-    title: `${project.title} — Denzel Maupa`,
+    title: socialTitle,
     description: project.description,
+    alternates: { canonical: pageUrl },
+    openGraph: {
+      title: socialTitle,
+      description: project.description,
+      type: "website",
+      siteName: "Denzel Maupa",
+      locale: "en_ZW",
+      url: pageUrl,
+      images: [{
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+        alt: project.socialImageAlt,
+      }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: socialTitle,
+      description: project.description,
+      images: [{
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+        alt: project.socialImageAlt,
+      }],
+    },
   };
 }
 
