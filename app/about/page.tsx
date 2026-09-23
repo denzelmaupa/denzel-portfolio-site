@@ -25,7 +25,15 @@ export default function AboutPage() {
       </section>
 
       <section className="about-body">
-        <div className="about-portrait" aria-label="Denzel Maupa monogram artwork"><span>D/M</span></div>
+        <figure className="about-portrait">
+          <img
+            src="/images/denzel-maupa-portrait.jpg"
+            alt="Portrait of Denzel Maupa"
+            width="1600"
+            height="2400"
+          />
+          <figcaption>Denzel Maupa / Harare, Zimbabwe</figcaption>
+        </figure>
         <div className="about-copy">
           <p className="about-lead">I’m Denzel Maupa, a Zimbabwean graphic designer and visual communicator based in Harare.</p>
           <p>Over the past few years, agency work has taken me through branding, advertising, large documents, magazines, social media, web, UI, photography and campaign design. It has also taught me that strong communication is as much about judgment as it is about aesthetics.</p>
