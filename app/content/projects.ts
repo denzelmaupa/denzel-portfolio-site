@@ -8,6 +8,7 @@ export type Project = {
   description: string;
   socialImage: string;
   socialImageAlt: string;
+  seo: { title: string; description: string; keywords: string[]; dateCreated: string };
   className: "opencred" | "tm-billboard" | "studio-portal";
   client: string;
   location: string;
@@ -34,6 +35,12 @@ export const projects: Project[] = [
       "AFC Commercial Bank’s microfinance identity, designed to make accessible finance feel modern and approachable while carrying forward the trust of an established national bank.",
     socialImage: "/projects/opencred/social-preview.jpg",
     socialImageAlt: "OpenCred Finance spatial identity designed by Denzel Maupa",
+    seo: {
+      title: "OpenCred Finance Brand Identity Case Study",
+      description: "Denzel Maupa's brand identity for OpenCred Finance, developed at Jericho Advertising to give AFC's Zimbabwean microfinance unit a distinct visual voice.",
+      keywords: ["OpenCred Finance branding", "brand identity design Zimbabwe", "Harare graphic designer", "microfinance visual identity"],
+      dateCreated: "2025",
+    },
     className: "opencred",
     client: "OpenCred Finance / AFC Commercial Bank",
     location: "Zimbabwe",
@@ -91,6 +98,12 @@ export const projects: Project[] = [
       "A nationwide billboard campaign for TM Pick n Pay, turning a familiar brown shopping bag into a simple, oversized expression of “Real Value Always.”",
     socialImage: "/projects/tm-pick-n-pay/social-preview.jpg",
     socialImageAlt: "TM Pick n Pay Real Value Always billboard designed by Denzel Maupa",
+    seo: {
+      title: "TM Pick n Pay Billboard Campaign Case Study",
+      description: "Denzel Maupa designed TM Pick n Pay's Real Value Always billboard campaign in Zimbabwe, turning its familiar paper shopping bag into a highway-scale idea.",
+      keywords: ["TM Pick n Pay billboard", "outdoor advertising Zimbabwe", "Harare graphic designer", "billboard campaign design"],
+      dateCreated: "2026",
+    },
     className: "tm-billboard",
     client: "TM Pick n Pay",
     location: "Zimbabwe",
@@ -147,6 +160,12 @@ export const projects: Project[] = [
       "An internal agency platform that grew from a personal timer into a role-based system for jobs, time, revisions, reporting and billable hours.",
     socialImage: "/projects/jericho-studio-portal/social-preview.png",
     socialImageAlt: "Reconstructed Jericho Studio Portal interface designed and built by Denzel Maupa",
+    seo: {
+      title: "Jericho Studio Portal UI/UX Case Study",
+      description: "Denzel Maupa designed and built Jericho Studio Portal, a Harare agency's internal UI/UX product for jobs, time tracking, revisions and billing.",
+      keywords: ["Jericho Studio Portal", "UI/UX design Harare", "product design Zimbabwe", "internal workflow app"],
+      dateCreated: "2025",
+    },
     className: "studio-portal",
     client: "Jericho Advertising",
     location: "Harare, Zimbabwe",

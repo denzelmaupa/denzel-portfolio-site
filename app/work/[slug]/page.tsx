@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectArtwork } from "../../components/ProjectArtwork";
 import { StudioPortalCaseStudy } from "../../components/StudioPortalCaseStudy";
 import { getProject, projects } from "../../content/projects";
+import { buildCreativeWorkJsonLd, buildProjectMetadata, serializeJsonLd } from "../../lib/seo";
 
 type ProjectPageProps = { params: Promise<{ slug: string }> };
 
@@ -15,42 +16,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
-  const requestHeaders = await headers();
-  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
-  const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
-  const pageUrl = new URL(`/work/${project.slug}`, `${protocol}://${host}`).toString();
-  const imageUrl = new URL(project.socialImage, `${protocol}://${host}`).toString();
-  const socialTitle = `${project.title} — Denzel Maupa`;
-  return {
-    title: socialTitle,
-    description: project.description,
-    alternates: { canonical: pageUrl },
-    openGraph: {
-      title: socialTitle,
-      description: project.description,
-      type: "website",
-      siteName: "Denzel Maupa",
-      locale: "en_ZW",
-      url: pageUrl,
-      images: [{
-        url: imageUrl,
-        width: 1200,
-        height: 630,
-        alt: project.socialImageAlt,
-      }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: socialTitle,
-      description: project.description,
-      images: [{
-        url: imageUrl,
-        width: 1200,
-        height: 630,
-        alt: project.socialImageAlt,
-      }],
-    },
-  };
+  return buildProjectMetadata(project);
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
@@ -65,14 +31,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <main className="interior-page" id="top">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildCreativeWorkJsonLd(project)) }} />
       <header className="site-header interior-header">
-        <a className="wordmark" href="/" aria-label="Denzel Maupa, home">DM<span>®</span></a>
+        <Link className="wordmark" href="/" aria-label="Denzel Maupa, home">DM<span>®</span></Link>
         <p className="header-role">{project.category}<br />{project.year}</p>
         <nav aria-label="Primary navigation">
-          <a href="/#work">Work</a>
-          <a href="/about">About</a>
-          <a href="/resume">Résumé</a>
-          <a href="/contact">Contact</a>
+          <Link href="/#work">Work</Link>
+          <Link href="/about">About</Link>
+          <Link href="/resume">Résumé</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
       </header>
 
@@ -405,10 +372,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       <footer className="next-project">
         <p>Next project / {nextProject.number}</p>
-        <a href={`/work/${nextProject.slug}`}>{nextProject.title}<span>↗</span></a>
+        <Link href={`/work/${nextProject.slug}`}>{nextProject.title}<span>↗</span></Link>
+        <p className="next-project-cta"><Link href="/contact">Discuss a role or project ↗</Link></p>
         <div className="footer-base">
           <p>© Denzel Maupa 2026</p>
-          <a href="/">Home</a>
+          <Link href="/">Home</Link>
           <a href="#top">Back to top ↑</a>
         </div>
       </footer>

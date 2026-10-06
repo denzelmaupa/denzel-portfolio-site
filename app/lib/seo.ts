@@ -1,4 +1,5 @@
 import type { Metadata, MetadataRoute } from "next";
+import type { Project } from "../content/projects";
 
 export const SITE_URL = "https://www.denzelmaupa.co.zw" as const;
 export const SITE_NAME = "Denzel Maupa" as const;
@@ -167,4 +168,33 @@ export function buildSitemapEntries(projects: { slug: string }[]): MetadataRoute
       priority: 0.7,
     })),
   ];
+}
+
+export function buildProjectMetadata(project: Project): Metadata {
+  return createPageMetadata({
+    ...project.seo,
+    path: `/work/${project.slug}`,
+    image: project.socialImage,
+    imageAlt: project.socialImageAlt,
+  });
+}
+
+export function buildCreativeWorkJsonLd(project: Project) {
+  const url = absoluteUrl(`/work/${project.slug}`);
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": `${url}#creativework`,
+    name: project.title,
+    description: project.seo.description,
+    url,
+    image: absoluteUrl(project.socialImage),
+    creator: { "@id": PERSON_ID },
+    about: { "@type": "Organization", name: project.client },
+    creditText: project.context,
+    dateCreated: project.seo.dateCreated,
+    locationCreated: { "@type": "Place", name: project.location },
+    keywords: project.seo.keywords,
+    inLanguage: "en-ZW",
+  };
 }

@@ -755,6 +755,8 @@ footer { min-height: 820px; display: flex; flex-direction: column; }
 .next-project > p { margin: 0; font-size: 9px; text-transform: uppercase; letter-spacing: .07em; }
 .next-project > a { position: relative; margin: auto 0; width: max-content; max-width: 92%; font: 500 clamp(82px, 14vw, 220px)/.78 var(--font-serif); letter-spacing: -.06em; }
 .next-project > a span { position: absolute; top: 0; right: -54px; font: 400 26px/1 var(--font-mono); }
+.next-project .next-project-cta { padding: 0 0 24px; font-size: 9px; }
+.next-project-cta a { border-bottom: 1px solid currentColor; padding-bottom: 6px; }
 .next-project .footer-base { border-color: rgba(242,239,232,.35); }
 
 .about-hero { min-height: 760px; padding: 34px 28px 86px; display: flex; flex-direction: column; justify-content: space-between; }
