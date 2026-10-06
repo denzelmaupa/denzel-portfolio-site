@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "next start",
     "test:seo": "node --test tests/seo-helpers.test.ts tests/seo-routes.test.ts tests/seo-projects.test.ts tests/seo-content.test.mjs",
+    "verify:seo": "node scripts/verify-seo.mjs",
     "dev:vinext": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
     "build:vinext": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
