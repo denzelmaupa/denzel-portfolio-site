@@ -43,7 +43,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </nav>
       </header>
 
-      <section className="case-intro">
+      <section className={`case-intro case-intro-${project.className}`}>
         <div className="case-kicker">
           <p><span>{project.number}</span> {project.discipline} / {project.category}</p>
           <p>{project.client} / {project.location}</p>

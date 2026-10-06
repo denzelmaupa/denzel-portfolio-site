@@ -644,8 +644,8 @@ footer { min-height: 820px; display: flex; flex-direction: column; }
 .portal-roles { background: #192843; color: #f5f6f9; }
 .portal-role-list { margin: -38px 0 48px; display: flex; flex-wrap: wrap; gap: 8px; }
 .portal-role-list span { padding: 8px 11px; border: 1px solid rgba(245,246,249,.36); border-radius: 999px; font-size: 8px; text-transform: uppercase; letter-spacing: .06em; }
-.portal-ui-grid { display: grid; gap: 42px; }
-.portal-ui-figure { margin: 0; }
+.portal-ui-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 42px; }
+.portal-ui-figure { min-width: 0; margin: 0; }
 .portal-ui-figure figcaption { padding-top: 14px; display: flex; justify-content: space-between; gap: 30px; border-top: 1px solid currentColor; }
 .portal-ui-figure figcaption span { color: #cf0a2c; }
 .portal-ui-frame { margin-bottom: 14px; overflow: hidden; border: 1px solid rgba(245,246,249,.25); background: #f5f6f9; color: #192843; font-family: Arial, system-ui, sans-serif; box-shadow: 24px 30px 60px rgba(4,10,21,.27); }
@@ -698,7 +698,7 @@ footer { min-height: 820px; display: flex; flex-direction: column; }
 .portal-social-grid button { margin-top: auto; background: #2463eb; }
 .portal-social-grid > div:last-child button { background: #7d2cf5; }
 .portal-reporting { background: #edf0f4; }
-.portal-report-grid { display: grid; gap: 48px; }
+.portal-report-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; }
 .portal-reporting .portal-ui-figure figcaption { color: #192843; }
 .portal-report-card { min-height: 560px; padding: 38px; background: #f8f9fb; }
 .portal-report-title { display: flex; justify-content: space-between; align-items: flex-start; }
@@ -1064,6 +1064,7 @@ footer { min-height: 820px; display: flex; flex-direction: column; }
   .case-intro { min-height: 500px; padding: 24px 16px 50px; }
   .case-kicker p:last-child { display: none; }
   .case-intro h1 { margin-bottom: 30px; font-size: clamp(80px, 28vw, 126px); }
+  .case-intro-opencred h1 { font-size: clamp(52px, 15.5vw, 92px); }
   .case-headline { align-self: flex-start; width: 92%; font-size: 34px; }
   .case-artwork { margin: 0 16px; width: calc(100% - 32px); height: 92vw; min-height: 380px; }
   .portal-case-section { padding: 80px 16px; }
@@ -1072,7 +1073,7 @@ footer { min-height: 820px; display: flex; flex-direction: column; }
   .portal-case-head h2 { font-size: 50px; }
   .portal-role-list { margin-top: -16px; }
   .portal-ui-grid, .portal-report-grid { gap: 54px; }
-  .portal-ui-frame { overflow-x: auto; }
+  .portal-ui-frame, .portal-report-grid { overflow-x: auto; }
   .portal-window-bar, .portal-app-shell, .portal-report-card { min-width: 720px; }
   .portal-app-shell { min-height: 480px; }
   .portal-ui-figure figcaption { flex-direction: column; gap: 6px; }
