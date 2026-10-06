@@ -111,3 +111,36 @@ export function buildRootMetadata(googleVerification?: string): Metadata {
     ...(googleVerification ? { verification: { google: googleVerification } } : {}),
   };
 }
+
+export const SUPPORTING_PAGE_SEO = {
+  about: {
+    title: "About | Multidisciplinary Designer in Zimbabwe",
+    description:
+      "Meet Denzel Maupa, a Harare-based graphic and brand designer whose UI/UX and product design practice brings clarity to digital experiences.",
+    path: "/about",
+  },
+  resume: {
+    title: "Résumé | Graphic, Brand, UI/UX & Product Designer",
+    description:
+      "Explore the experience of Denzel Maupa, a Zimbabwean graphic, brand, UI/UX and product designer working across advertising and digital products.",
+    path: "/resume",
+  },
+  contact: {
+    title: "Contact | Design Roles, Projects & Collaborations",
+    description:
+      "Contact Harare-based designer Denzel Maupa about graphic, brand, UI/UX and product design roles, client projects or creative collaborations.",
+    path: "/contact",
+  },
+} satisfies Record<string, PageMetadataInput>;
+
+export function buildProfilePageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${SITE_URL}/about#profile`,
+    url: `${SITE_URL}/about`,
+    name: "About Denzel Maupa",
+    mainEntity: { "@id": PERSON_ID },
+    inLanguage: "en-ZW",
+  };
+}

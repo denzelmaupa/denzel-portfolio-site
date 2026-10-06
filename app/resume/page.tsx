@@ -1,11 +1,8 @@
-import type { Metadata } from "next";
+import Link from "next/link";
 import { PrintResumeButton } from "../components/PrintResumeButton";
+import { createPageMetadata, SUPPORTING_PAGE_SEO } from "../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Résumé — Denzel Maupa",
-  description:
-    "Résumé of Denzel Maupa, a Zimbabwean graphic designer and visual communicator working across branding, advertising and UI/UX.",
-};
+export const metadata = createPageMetadata(SUPPORTING_PAGE_SEO.resume);
 
 const experience = [
   {
@@ -62,13 +59,13 @@ export default function ResumePage() {
   return (
     <main className="interior-page resume-page" id="top">
       <header className="site-header interior-header resume-site-header">
-        <a className="wordmark" href="/" aria-label="Denzel Maupa, home">DM<span>®</span></a>
+        <Link className="wordmark" href="/" aria-label="Denzel Maupa, home">DM<span>®</span></Link>
         <p className="header-role">Graphic designer &amp; visual communicator<br />Harare / Global</p>
         <nav aria-label="Primary navigation">
-          <a href="/#work">Work</a>
-          <a href="/about">About</a>
-          <a href="/resume" aria-current="page">Résumé</a>
-          <a href="/contact">Contact</a>
+          <Link href="/#work">Work</Link>
+          <Link href="/about">About</Link>
+          <Link href="/resume" aria-current="page">Résumé</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
       </header>
 
@@ -78,8 +75,8 @@ export default function ResumePage() {
           <h1>Denzel<br /><i>Maupa.</i></h1>
         </div>
         <div className="resume-intro-copy">
-          <p>Graphic designer &amp; visual communicator</p>
-          <span>Branding / Advertising / UI/UX</span>
+          <p>Graphic, brand, UI/UX &amp; product designer</p>
+          <span>Harare, Zimbabwe / Southern Africa / Remote &amp; international</span>
           <PrintResumeButton />
         </div>
       </section>
@@ -191,7 +188,7 @@ export default function ResumePage() {
       </article>
 
       <footer className="interior-footer resume-page-footer">
-        <p>© Denzel Maupa 2026</p><a href="/">Return home ↙</a>
+        <p>© Denzel Maupa 2026</p><Link href="/">Return home ↙</Link>
       </footer>
     </main>
   );

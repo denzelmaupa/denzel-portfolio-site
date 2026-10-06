@@ -1,27 +1,26 @@
-import type { Metadata } from "next";
+import Link from "next/link";
+import { createPageMetadata, SUPPORTING_PAGE_SEO } from "../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact — Denzel Maupa",
-  description: "Contact Denzel Maupa about design roles, projects and creative collaborations.",
-};
+export const metadata = createPageMetadata(SUPPORTING_PAGE_SEO.contact);
 
 export default function ContactPage() {
   return (
     <main className="interior-page contact-page">
       <header className="site-header interior-header">
-        <a className="wordmark" href="/" aria-label="Denzel Maupa, home">DM<span>®</span></a>
+        <Link className="wordmark" href="/" aria-label="Denzel Maupa, home">DM<span>®</span></Link>
         <p className="header-role">Graphic designer &amp; visual communicator<br />Harare / Global</p>
         <nav aria-label="Primary navigation">
-          <a href="/#work">Work</a>
-          <a href="/about">About</a>
-          <a href="/resume">Résumé</a>
-          <a href="/contact" aria-current="page">Contact</a>
+          <Link href="/#work">Work</Link>
+          <Link href="/about">About</Link>
+          <Link href="/resume">Résumé</Link>
+          <Link href="/contact" aria-current="page">Contact</Link>
         </nav>
       </header>
 
       <section className="contact-page-main">
         <div className="contact-status"><span />Open to the right conversation</div>
-        <p>Have a role, project or collaboration in mind?</p>
+        <h1>Have a design role, client project or collaboration in mind?</h1>
+        <p>Based in Harare, Zimbabwe. Open to work across Southern Africa, remote partnerships and international onsite opportunities.</p>
         <a href="mailto:denzelmaupa@gmail.com">Say<br /><i>hello.</i><span>↗</span></a>
       </section>
 
@@ -32,7 +31,7 @@ export default function ContactPage() {
       </section>
 
       <footer className="interior-footer">
-        <p>© Denzel Maupa 2026</p><a href="/">Return home ↙</a>
+        <p>© Denzel Maupa 2026</p><Link href="/">Return home ↙</Link>
       </footer>
     </main>
   );
