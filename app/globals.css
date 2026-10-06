@@ -791,6 +791,14 @@ footer { min-height: 820px; display: flex; flex-direction: column; }
 .contact-details p { margin: 0 0 34px; color: var(--stone); }
 .contact-page .interior-footer { margin-top: 70px; }
 
+.not-found-page { min-height: 100vh; display: flex; flex-direction: column; }
+.not-found-content { flex: 1; min-height: 590px; padding: 48px 28px 72px; display: flex; flex-direction: column; justify-content: center; }
+.not-found-content h1 { max-width: 1100px; margin: 64px 0 34px; font-size: clamp(68px, 10vw, 160px); }
+.not-found-content > p:not(.page-label) { margin: 0 0 48px; font-size: 11px; line-height: 1.6; }
+.not-found-links { max-width: 530px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.not-found-links a { padding: 14px 0; border-top: 1px solid var(--ink); font-size: 9px; text-transform: uppercase; letter-spacing: .06em; }
+.not-found-page .interior-footer { margin-top: 0; }
+
 .resume-page { background: #d0cdc5; }
 .resume-intro {
   min-height: 640px;

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, MetadataRoute } from "next";
 
 export const SITE_URL = "https://www.denzelmaupa.co.zw" as const;
 export const SITE_NAME = "Denzel Maupa" as const;
@@ -143,4 +143,28 @@ export function buildProfilePageJsonLd() {
     mainEntity: { "@id": PERSON_ID },
     inLanguage: "en-ZW",
   };
+}
+
+export function buildRobotsConfig(): MetadataRoute.Robots {
+  return {
+    rules: { userAgent: "*", allow: "/" },
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
+  };
+}
+
+export function buildSitemapEntries(projects: { slug: string }[]): MetadataRoute.Sitemap {
+  const pages = ["/", "/about", "/resume", "/contact"];
+  return [
+    ...pages.map((path, index) => ({
+      url: absoluteUrl(path),
+      changeFrequency: "monthly" as const,
+      priority: index === 0 ? 1 : 0.6,
+    })),
+    ...projects.map(({ slug }) => ({
+      url: absoluteUrl(`/work/${slug}`),
+      changeFrequency: "yearly" as const,
+      priority: 0.7,
+    })),
+  ];
 }

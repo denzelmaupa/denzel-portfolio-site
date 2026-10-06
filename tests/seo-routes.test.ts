@@ -6,7 +6,10 @@ import {
   SUPPORTING_PAGE_SEO,
   createPageMetadata,
   buildProfilePageJsonLd,
+  buildRobotsConfig,
+  buildSitemapEntries,
 } from "../app/lib/seo.ts";
+import { projects } from "../app/content/projects.ts";
 
 test("supporting routes have distinct titles and production canonicals", () => {
   const entries = Object.values(SUPPORTING_PAGE_SEO);
@@ -27,4 +30,26 @@ test("About profile schema identifies Denzel as its main entity", () => {
   assert.equal(profile["@type"], "ProfilePage");
   assert.equal(profile.url, `${SITE_URL}/about`);
   assert.equal(profile.mainEntity["@id"], PERSON_ID);
+});
+
+test("robots points crawlers to the production host and sitemap", () => {
+  const robots = buildRobotsConfig();
+  assert.deepEqual(robots.rules, { userAgent: "*", allow: "/" });
+  assert.equal(robots.sitemap, `${SITE_URL}/sitemap.xml`);
+  assert.equal(robots.host, SITE_URL);
+});
+
+test("sitemap contains exactly the public pages and project slugs", () => {
+  const entries = buildSitemapEntries(projects);
+  const urls = entries.map((entry) => entry.url);
+  assert.equal(urls.length, 7);
+  assert.equal(new Set(urls).size, 7);
+  assert.deepEqual(urls, [
+    `${SITE_URL}/`,
+    `${SITE_URL}/about`,
+    `${SITE_URL}/resume`,
+    `${SITE_URL}/contact`,
+    ...projects.map((project) => `${SITE_URL}/work/${project.slug}`),
+  ]);
+  assert.ok(urls.every((url) => url.startsWith(SITE_URL)));
 });
