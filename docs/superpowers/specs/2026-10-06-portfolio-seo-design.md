@@ -1,7 +1,7 @@
 # Denzel Maupa Portfolio SEO Design
 
-**Date:** 2026-10-06  
-**Site:** `https://www.denzelmaupa.co.zw`  
+**Date:** 2026-10-06
+**Site:** `https://www.denzelmaupa.co.zw`
 **Project:** Existing Next.js portfolio deployed on Vercel
 
 ## Objective
