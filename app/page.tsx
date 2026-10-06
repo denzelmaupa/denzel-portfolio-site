@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import * as THREE from "three";
 import { ProjectArtwork } from "./components/ProjectArtwork";
 import { projects } from "./content/projects";
@@ -390,15 +391,15 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="wordmark" href="/" aria-label="Denzel Maupa, home">
+        <Link className="wordmark" href="/" aria-label="Denzel Maupa, home">
           DM<span>®</span>
-        </a>
+        </Link>
         <p className="header-role">Graphic designer &amp; visual communicator<br />Harare / Global</p>
         <nav aria-label="Primary navigation">
-          <a href="#work">Work</a>
-          <a href="/about">About</a>
-          <a href="/resume">Résumé</a>
-          <a href="/contact">Contact</a>
+          <Link href="#work">Work</Link>
+          <Link href="/about">About</Link>
+          <Link href="/resume">Résumé</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
       </header>
 
@@ -407,8 +408,8 @@ export default function Home() {
           <p className="eyebrow"><span>Open to thoughtful opportunities</span> / 2026</p>
           <h1>Maximised minimalism. <i>Creative simplicity.</i></h1>
           <div className="hero-foot">
-            <p>Graphic design and visual communication shaped by advertising, brand systems and shipped digital products.</p>
-            <a href="#work" className="text-link">View selected work <span>↘</span></a>
+            <p>Graphic, brand, UI/UX and product designer in Harare, Zimbabwe. Working across Southern Africa; open to remote and international roles and projects.</p>
+            <Link href="#work" className="text-link">View selected work <span>↘</span></Link>
           </div>
         </div>
         <HeroSculpture />
@@ -436,12 +437,14 @@ export default function Home() {
                       className="brand-logo brand-logo-white"
                       src={`/brands/${brand.slug}-white.svg`}
                       alt={duplicate ? "" : brand.name}
+                      loading="lazy"
                     />
                     <img
                       className="brand-logo brand-logo-colour"
                       src={`/brands/${brand.slug}-colour.svg`}
                       alt=""
                       aria-hidden="true"
+                      loading="lazy"
                     />
                   </figure>
                 ))}
@@ -459,7 +462,7 @@ export default function Home() {
         <div className="projects">
           {projects.map((project) => (
             <article className="project" key={project.title} data-reveal>
-              <a className="project-link" href={`/work/${project.slug}`} aria-label={`View ${project.title} case study`}>
+              <Link className="project-link" href={`/work/${project.slug}`} aria-label={`View ${project.title} case study`}>
                 <div className={`project-art ${project.className}`}>
                   <ProjectArtwork project={project} />
                 </div>
@@ -472,7 +475,7 @@ export default function Home() {
                   <p>{project.discipline}<br />{project.category}</p>
                   <p className="project-year">{project.year}</p>
                 </div>
-              </a>
+              </Link>
             </article>
           ))}
         </div>
@@ -491,16 +494,27 @@ export default function Home() {
             <p>01 / Graphic design</p>
             <h2>Make the idea visible.</h2>
             <span>Identity systems, campaigns, editorial, packaging and art direction.</span>
+            <div className="practice-links">
+              <Link href="/work/opencred-finance">Explore OpenCred branding ↗</Link>
+              <Link href="/work/tm-pick-n-pay-billboard">See TM Pick n Pay billboards ↗</Link>
+            </div>
           </article>
           <article data-reveal>
             <p>02 / UI/UX design</p>
             <h2>Design how it works.</h2>
             <span>Product strategy, workflow mapping, interface systems, prototyping and shipped digital experiences.</span>
+            <div className="practice-links">
+              <Link href="/work/jericho-studio-portal">Explore Jericho Studio Portal ↗</Link>
+            </div>
           </article>
           <article data-reveal>
             <p>03 / Shared systems</p>
             <h2>Make every touchpoint belong.</h2>
             <span>Design systems, motion principles, accessible components and digital art direction.</span>
+            <div className="practice-links">
+              <Link href="/work/opencred-finance">See OpenCred’s brand system ↗</Link>
+              <Link href="/work/jericho-studio-portal">See the Studio Portal product ↗</Link>
+            </div>
           </article>
         </div>
       </section>
@@ -534,7 +548,7 @@ export default function Home() {
         </div>
         <div className="contact-main" data-reveal>
           <p>Let’s make something clear, useful and memorable.</p>
-          <a href="/contact">Start a<br /><i>conversation.</i><span>↗</span></a>
+          <Link href="/contact">Start a<br /><i>conversation.</i><span>↗</span></Link>
         </div>
         <div className="footer-base">
           <p>© Denzel Maupa 2026</p>

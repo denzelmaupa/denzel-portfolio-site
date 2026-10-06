@@ -53,7 +53,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </section>
 
       <section className={`case-artwork project-art ${project.className}`} aria-label={`${project.title} project preview`}>
-        <ProjectArtwork project={project} />
+        <ProjectArtwork project={project} eager />
       </section>
 
       <section className="case-facts" aria-label="Project facts">

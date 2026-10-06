@@ -1,6 +1,6 @@
 import type { Project } from "../content/projects";
 
-export function ProjectArtwork({ project }: { project: Project }) {
+export function ProjectArtwork({ project, eager = false }: { project: Project; eager?: boolean }) {
   if (project.className === "opencred") {
     return (
       <>
@@ -9,6 +9,7 @@ export function ProjectArtwork({ project }: { project: Project }) {
           <img
             src="/projects/opencred/logo-reversed.svg"
             alt="OpenCred Finance"
+            loading={eager ? "eager" : "lazy"}
           />
           <div className="opencred-hero-meta">
             <span>A product of AFC Commercial Bank</span>
@@ -25,6 +26,7 @@ export function ProjectArtwork({ project }: { project: Project }) {
         <img
           src="/projects/tm-pick-n-pay/final-landscape-mockup.jpg"
           alt="TM Pick n Pay Real Value Always brown shopping bag billboard mock-up"
+          loading={eager ? "eager" : "lazy"}
         />
         <div className="tm-real-hero-meta">
           <span>OUT-OF-HOME / NATIONWIDE / ZIMBABWE</span>
